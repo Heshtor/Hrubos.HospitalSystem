@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Web", "Hrubos.HospitalSystem.Web\Hrubos.HospitalSystem.Web.csproj", "{338C6092-C37C-4EF4-9B4E-34778BAA0690}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Domain", "Hrubos.HospitalSystem.Domain\Hrubos.HospitalSystem.Domain.csproj", "{5FD1A10F-C46C-40A7-82CD-7E8070B92BE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Infrastructure", "Hrubos.HospitalSystem.Infrastructure\Hrubos.HospitalSystem.Infrastructure.csproj", "{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Application", "Hrubos.HospitalSystem.Application\Hrubos.HospitalSystem.Application.csproj", "{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{338C6092-C37C-4EF4-9B4E-34778BAA0690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{338C6092-C37C-4EF4-9B4E-34778BAA0690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{338C6092-C37C-4EF4-9B4E-34778BAA0690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD1A10F-C46C-40A7-82CD-7E8070B92BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD1A10F-C46C-40A7-82CD-7E8070B92BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD1A10F-C46C-40A7-82CD-7E8070B92BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD1A10F-C46C-40A7-82CD-7E8070B92BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
