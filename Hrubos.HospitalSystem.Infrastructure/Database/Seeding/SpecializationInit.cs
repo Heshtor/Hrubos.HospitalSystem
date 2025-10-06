@@ -4,33 +4,31 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
 {
     internal class SpecializationInit
     {
-        public List<Specialization> GenerateSpecializations3()
+        public List<Specialization> GenerateSpecializations()
         {
-            List<Specialization> specializations = new List<Specialization>();
-
-            var spec1 = new Specialization()
+            return new List<Specialization>()
             {
-                Id = 1,
-                Name = "Blabla1"
+                new Specialization {
+                    Id = 1,
+                    Name = "Oftalmologie"
+                },
+                new Specialization {
+                    Id = 2,
+                    Name = "Chirurgie"
+                },
+                new Specialization {
+                    Id = 3,
+                    Name = "Pediatrie"
+                },
+                new Specialization {
+                    Id = 4,
+                    Name = "Kardiologie"
+                },
+                new Specialization {
+                    Id = 5,
+                    Name = "Pneumologie"
+                }
             };
-
-            var spec2 = new Specialization()
-            {
-                Id = 2,
-                Name = "Blabla2"
-            };
-
-            var spec3 = new Specialization()
-            {
-                Id = 3,
-                Name = "Blabla3"
-            };
-
-            specializations.Add(spec1);
-            specializations.Add(spec2);
-            specializations.Add(spec3);
-
-            return specializations;
         }
     }
 }
