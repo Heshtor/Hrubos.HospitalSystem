@@ -1,4 +1,6 @@
-﻿namespace Hrubos.HospitalSystem.Domain.Entities.Interfaces
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Hrubos.HospitalSystem.Domain.Entities.Interfaces
 {
     public interface IUser<TKey> : IEntity<TKey>
     {

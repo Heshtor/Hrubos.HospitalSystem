@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Hrubos.HospitalSystem.Domain.Entities.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hrubos.HospitalSystem.Domain.Entities
@@ -10,6 +11,6 @@ namespace Hrubos.HospitalSystem.Domain.Entities
         [StringLength(70)]
         public string Name { get; set; }
 
-        public IList<Doctor>? Doctors { get; set; }
+        public IUser<int>? Doctors { get; set; }
     }
 }

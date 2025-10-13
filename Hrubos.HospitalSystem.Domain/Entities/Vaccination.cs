@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Hrubos.HospitalSystem.Domain.Entities.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hrubos.HospitalSystem.Domain.Entities
@@ -17,6 +18,6 @@ namespace Hrubos.HospitalSystem.Domain.Entities
 
         [ForeignKey(nameof(Patient))]
         public int PatientId { get; set; }
-        public Patient? Patient { get; set; }
+        public IUser<int>? Patient { get; set; }
     }
 }
