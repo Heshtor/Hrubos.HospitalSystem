@@ -1,3 +1,5 @@
+using Hrubos.HospitalSystem.Application.Abstraction;
+using Hrubos.HospitalSystem.Application.Implementation;
 using Hrubos.HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.43");
 builder.Services.AddDbContext<HospitalSystemDbContext>(options => options.UseMySql(connectionString, serverVersion));
+
+//registrace služeb aplikaèní vrstvy
+builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>();
+builder.Services.AddScoped<IExaminationTypeAppService, ExaminationTypeAppService>();
 
 var app = builder.Build();
 
@@ -26,6 +32,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
