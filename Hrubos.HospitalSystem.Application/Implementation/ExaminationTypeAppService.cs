@@ -23,5 +23,21 @@ namespace Hrubos.HospitalSystem.Application.Implementation
             _hospitalSystemDbContext.ExaminationTypes.Add(examinationType);
             _hospitalSystemDbContext.SaveChanges();
         }
+
+        public bool Delete(int id)
+        {
+            bool deleted = false;
+
+            var examinationType = _hospitalSystemDbContext.ExaminationTypes.FirstOrDefault(e => e.Id == id);
+
+            if (examinationType != null)
+            {
+                _hospitalSystemDbContext.ExaminationTypes.Remove(examinationType);
+                _hospitalSystemDbContext.SaveChanges();
+                deleted = true;
+            }
+
+            return deleted;
+        }
     }
 }

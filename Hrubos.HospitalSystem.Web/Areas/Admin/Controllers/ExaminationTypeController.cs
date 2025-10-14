@@ -32,5 +32,19 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Select));
         }
+
+        public IActionResult Delete(int id)
+        {
+            bool deleted = _examinationTypeAppService.Delete(id);
+
+            if (deleted)
+            {
+                return RedirectToAction(nameof(Select));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
