@@ -17,5 +17,11 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         {
             return _hospitalSystemDbContext.ExaminationTypes.ToList();
         }
+
+        public void Create(ExaminationType examinationType)
+        {
+            _hospitalSystemDbContext.ExaminationTypes.Add(examinationType);
+            _hospitalSystemDbContext.SaveChanges();
+        }
     }
 }
