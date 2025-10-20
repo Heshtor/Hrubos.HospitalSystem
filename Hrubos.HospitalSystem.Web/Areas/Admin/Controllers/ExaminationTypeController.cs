@@ -46,5 +46,33 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var examinationType = _examinationTypeAppService.GetById(id);
+
+            if (examinationType == null)
+            {
+                return NotFound();
+            }
+
+            return View(examinationType);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, ExaminationType examinationType)
+        {
+            bool updated = _examinationTypeAppService.Edit(id, examinationType);
+
+            if (updated)
+            {
+                return RedirectToAction(nameof(Select));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

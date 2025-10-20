@@ -28,7 +28,7 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         {
             bool deleted = false;
 
-            var examinationType = _hospitalSystemDbContext.ExaminationTypes.FirstOrDefault(e => e.Id == id);
+            var examinationType = GetById(id);
 
             if (examinationType != null)
             {
@@ -38,6 +38,27 @@ namespace Hrubos.HospitalSystem.Application.Implementation
             }
 
             return deleted;
+        }
+
+        public ExaminationType GetById(int id)
+        {
+            return _hospitalSystemDbContext.ExaminationTypes.FirstOrDefault(e => e.Id == id);
+        }
+
+        public bool Edit(int id, ExaminationType newExaminationType)
+        {
+            bool updated = false;
+
+            var examinationType = GetById(id);
+
+            if (examinationType != null)
+            {
+                _hospitalSystemDbContext.Entry(examinationType).CurrentValues.SetValues(newExaminationType);
+                _hospitalSystemDbContext.SaveChanges();
+                updated = true;
+            }
+
+            return updated;
         }
     }
 }
