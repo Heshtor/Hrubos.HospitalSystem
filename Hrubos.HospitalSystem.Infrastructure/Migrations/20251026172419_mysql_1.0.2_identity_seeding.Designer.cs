@@ -4,6 +4,7 @@ using Hrubos.HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(HospitalSystemDbContext))]
-    partial class HospitalSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251026172419_mysql_1.0.2_identity_seeding")]
+    partial class mysql_102_identity_seeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

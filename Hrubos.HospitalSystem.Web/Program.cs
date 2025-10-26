@@ -2,6 +2,8 @@ using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Application.Implementation;
 using Hrubos.HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Hrubos.HospitalSystem.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.43");
 builder.Services.AddDbContext<HospitalSystemDbContext>(options => options.UseMySql(connectionString, serverVersion));
+
+//Configuration for Identity
+builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<HospitalSystemDbContext>().AddDefaultTokenProviders();
 
 //registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>();
@@ -29,6 +34,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
