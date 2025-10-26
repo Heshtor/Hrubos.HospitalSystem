@@ -1,10 +1,13 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Hrubos.HospitalSystem.Infrastructure.Identity.Enums;
 
 namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doctor))]
     public class ExaminationTypeController : Controller
     {
         IExaminationTypeAppService _examinationTypeAppService;
