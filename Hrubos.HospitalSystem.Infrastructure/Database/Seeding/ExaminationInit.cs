@@ -13,32 +13,32 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     DateTime = DateTime.Now.AddDays(-10),
                     Notes = "Kontrola tlaku",
                     ExaminationTypeId = 1,
-                    PatientId = 1,
-                    DoctorId = 1
+                    PatientId = 6,
+                    DoctorId = 2
                 },
                 new Examination {
                     Id = 2,
                     DateTime = DateTime.Now.AddDays(-5),
                     Notes = "Krevní test",
                     ExaminationTypeId = 3,
-                    PatientId = 2,
-                    DoctorId = 2
+                    PatientId = 7,
+                    DoctorId = 3
                 },
                 new Examination {
                     Id = 3,
                     DateTime = DateTime.Now.AddDays(-2),
                     Notes = "Vyšetření kloubů",
                     ExaminationTypeId = 2,
-                    PatientId = 3,
-                    DoctorId = 3
+                    PatientId = 8,
+                    DoctorId = 4
                 },
                 new Examination {
                     Id = 4,
                     DateTime = DateTime.Now.AddDays(-8),
                     Notes = "Vyšetření ruky",
                     ExaminationTypeId = 2,
-                    PatientId = 2,
-                    DoctorId = 3
+                    PatientId = 7,
+                    DoctorId = 4
                 }
             };
         }

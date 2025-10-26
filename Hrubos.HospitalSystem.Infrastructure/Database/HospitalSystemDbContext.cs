@@ -25,44 +25,64 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Ignore<Specialization>();
-            modelBuilder.Ignore<DoctorPatient>();
-            modelBuilder.Ignore<Examination>();
-            modelBuilder.Ignore<Vaccination>();
 
-            //modelBuilder.Entity<Specialization>().HasData(new SpecializationInit().GenerateSpecializations());
+            modelBuilder.Entity<Specialization>()
+                .HasMany<User>(s => s.Doctors as IList<User>)
+                .WithOne(u => u.Specialization)
+                .HasForeignKey(u => u.SpecializationId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<DoctorPatient>().HasData(new DoctorPatientInit().GenerateDoctorPatients());
+            modelBuilder.Entity<Examination>()
+                .HasOne(e => e.Patient as User)
+                .WithMany(u => u.PatientExaminations)
+                .HasForeignKey(e => e.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Examination>()
+                .HasOne(e => e.Doctor as User)
+                .WithMany(u => u.DoctorExaminations)
+                .HasForeignKey(e => e.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Vaccination>()
+                .HasOne<User>(e => e.Patient as User)
+                .WithMany(u => u.Vaccinations)
+                .HasForeignKey(e => e.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<DoctorPatient>()
+                .HasOne(dp => dp.Doctor as User)
+                .WithMany(u => u.DoctorPatients)
+                .HasForeignKey(dp => dp.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<DoctorPatient>()
+                .HasOne(dp => dp.Patient as User)
+                .WithMany(u => u.PatientDoctors)
+                .HasForeignKey(dp => dp.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Specialization>().HasData(new SpecializationInit().GenerateSpecializations());
+
+            // Přidání uživatelských rolí do tabulky
+            modelBuilder.Entity<Role>().HasData(new RolesInit().GetRolesAMC());
+
+            // Přidání uživatelů do tabulky
+            modelBuilder.Entity<User>().HasData(new UserInit().GetAdmin());
+            modelBuilder.Entity<User>().HasData(new UserInit().GetDoctors());
+            modelBuilder.Entity<User>().HasData(new UserInit().GetPatients());
+
+            // Přiřazení rolí uživatelům
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(new UserRolesInit().GetRoles());
+
+            modelBuilder.Entity<DoctorPatient>().HasData(new DoctorPatientInit().GenerateDoctorPatients());
 
             modelBuilder.Entity<ExaminationType>().HasData(new ExaminationTypeInit().GenerateExaminationTypes());
-            //modelBuilder.Entity<Examination>().HasData(new ExaminationInit().GenerateExaminations());
+            modelBuilder.Entity<Examination>().HasData(new ExaminationInit().GenerateExaminations());
             modelBuilder.Entity<ExaminationResult>().HasData(new ExaminationResultInit().GenerateExaminationResults());
 
             modelBuilder.Entity<VaccineType>().HasData(new VaccineTypeInit().GenerateVaccineTypes());
-            //modelBuilder.Entity<Vaccination>().HasData(new VaccinationInit().GenerateVaccinations());
-
-
-
-
-            //Identity - User and Role initialization
-            //roles must be added first
-            RolesInit rolesInit = new RolesInit();
-            modelBuilder.Entity<Role>().HasData(rolesInit.GetRolesAMC());
-
-            //then, create users ...
-            UserInit userInit = new UserInit();
-            User admin = userInit.GetAdmin();
-            User doctor = userInit.GetDoctor();
-
-            //... and add them to the table
-            modelBuilder.Entity<User>().HasData(admin, doctor);
-
-            //and finally, connect the users with the roles
-            UserRolesInit userRolesInit = new UserRolesInit();
-            List<IdentityUserRole<int>> adminUserRoles = userRolesInit.GetRolesForAdmin();
-            List<IdentityUserRole<int>> doctorUserRoles = userRolesInit.GetRolesForDoctor();
-            modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
-            modelBuilder.Entity<IdentityUserRole<int>>().HasData(doctorUserRoles);
+            modelBuilder.Entity<Vaccination>().HasData(new VaccinationInit().GenerateVaccinations());
         }
     }
 }

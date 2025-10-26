@@ -11,6 +11,6 @@ namespace Hrubos.HospitalSystem.Domain.Entities
         [StringLength(70)]
         public string Name { get; set; }
 
-        public IUser<int>? Doctors { get; set; }
+        public IList<IUser<int>>? Doctors { get; set; }
     }
 }

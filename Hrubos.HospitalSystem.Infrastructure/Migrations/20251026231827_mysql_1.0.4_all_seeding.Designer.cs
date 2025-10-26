@@ -4,6 +4,7 @@ using Hrubos.HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(HospitalSystemDbContext))]
-    partial class HospitalSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251026231827_mysql_1.0.4_all_seeding")]
+    partial class mysql_104_all_seeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +117,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2025, 10, 17, 0, 25, 46, 825, DateTimeKind.Local).AddTicks(2667),
+                            DateTime = new DateTime(2025, 10, 17, 0, 18, 26, 931, DateTimeKind.Local).AddTicks(7497),
                             DoctorId = 2,
                             ExaminationTypeId = 1,
                             Notes = "Kontrola tlaku",
@@ -123,7 +126,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2025, 10, 22, 0, 25, 46, 826, DateTimeKind.Local).AddTicks(5066),
+                            DateTime = new DateTime(2025, 10, 22, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9735),
                             DoctorId = 3,
                             ExaminationTypeId = 3,
                             Notes = "Krevní test",
@@ -132,7 +135,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2025, 10, 25, 0, 25, 46, 826, DateTimeKind.Local).AddTicks(5080),
+                            DateTime = new DateTime(2025, 10, 25, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9749),
                             DoctorId = 4,
                             ExaminationTypeId = 2,
                             Notes = "Vyšetření kloubů",
@@ -141,7 +144,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2025, 10, 19, 0, 25, 46, 826, DateTimeKind.Local).AddTicks(5082),
+                            DateTime = new DateTime(2025, 10, 19, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9752),
                             DoctorId = 4,
                             ExaminationTypeId = 2,
                             Notes = "Vyšetření ruky",
@@ -314,32 +317,32 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 10, 27, 0, 25, 46, 826, DateTimeKind.Local).AddTicks(9588),
-                            NextDose = new DateTime(2026, 4, 27, 0, 25, 46, 826, DateTimeKind.Local).AddTicks(9733),
+                            DateTime = new DateTime(2024, 10, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4240),
+                            NextDose = new DateTime(2026, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4387),
                             PatientId = 6,
                             VaccineTypeId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2025, 2, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(57),
-                            NextDose = new DateTime(2026, 2, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(60),
+                            DateTime = new DateTime(2025, 2, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4706),
+                            NextDose = new DateTime(2026, 2, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4708),
                             PatientId = 7,
                             VaccineTypeId = 2
                         },
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2025, 4, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(62),
-                            NextDose = new DateTime(2026, 4, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(63),
+                            DateTime = new DateTime(2025, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4710),
+                            NextDose = new DateTime(2026, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4711),
                             PatientId = 8,
                             VaccineTypeId = 3
                         },
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2025, 7, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(64),
-                            NextDose = new DateTime(2026, 10, 27, 0, 25, 46, 827, DateTimeKind.Local).AddTicks(65),
+                            DateTime = new DateTime(2025, 7, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4718),
+                            NextDose = new DateTime(2026, 10, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4719),
                             PatientId = 6,
                             VaccineTypeId = 2
                         });
@@ -517,7 +520,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7f9499d-dc35-4df8-af69-01c324f7978f",
+                            ConcurrencyStamp = "4c72ddef-1aa7-4411-9a02-f8783dd44ca9",
                             Email = "admin@admin.cz",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -527,7 +530,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             NormalizedUserName = "ADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEC4prnSMIdRUykdd65G87+g3lLCc9cqJ/re6T1TsQFv5xlMrmVIe4k7yMQiEYWpH3A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b2c649c54f645ce87d0a5bab2300bc2",
+                            SecurityStamp = "d572d30355394513a9f9c043e9ab8196",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -535,7 +538,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cde480e0-53be-40de-a746-f71e19c3e968",
+                            ConcurrencyStamp = "506432e5-4fde-4c73-a54f-6b491c40a372",
                             Email = "jan.novak@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Jan",
@@ -546,7 +549,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "111222333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6fd7297ae8f04872a9eda6314c038ae0",
+                            SecurityStamp = "3dd1981a443d473c81b8b4aa6a9af64f",
                             SpecializationId = 1,
                             TwoFactorEnabled = false,
                             UserName = "doctor1"
@@ -555,7 +558,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33d5e71a-cd55-4e64-9531-9961f7ab18e0",
+                            ConcurrencyStamp = "23b53f1a-574f-4e7d-aa91-4fa895389d56",
                             Email = "petr.svoboda@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Petr",
@@ -563,10 +566,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "PETR.SVOBODA@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK4DkND+5IwQiNI01DelkSwKPGQnzZAxCmobmvF3J0w5Xr6YO4bUtzjJwe2qRzUv7g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "222333444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88ba44dd5e8a422bb15f5293689aa2e5",
+                            SecurityStamp = "279fb73875ae47cd879c99b203c3b207",
                             SpecializationId = 2,
                             TwoFactorEnabled = false,
                             UserName = "doctor2"
@@ -575,7 +578,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a0aee65b-b82e-44a5-954a-0b1737af0ee9",
+                            ConcurrencyStamp = "ea57e9c6-b536-4949-8821-c33c6aa32c87",
                             Email = "lucie.dvorakova@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Lucie",
@@ -583,10 +586,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "LUCIE.DVORAKOVA@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMK02V+4Wdm0lgraNwSBHPhhYUFmVpoCrp103XwzNXTFK6/s8xx0AAdpsd2G2KquQQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "333444555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0f2ba195e9c142e9974a379026eedfea",
+                            SecurityStamp = "ae5bf88681b44301b71cd14a895dc5fe",
                             SpecializationId = 3,
                             TwoFactorEnabled = false,
                             UserName = "doctor3"
@@ -595,7 +598,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "520a35d8-69c8-4821-8b97-7dc9f18ad3e1",
+                            ConcurrencyStamp = "3d4642f4-2169-4ada-b4b9-6f6454227581",
                             Email = "arnost.patek@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Arnošt",
@@ -603,10 +606,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ARNOST.PATEK@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGrcdYyAHwCXTbk9VS3VItkcEq4bhgiPBFetA8rLbp/6Asw87PI2TqWE5csu8u6TDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "444555666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9786a9a09e6243ceb14f661a42154e5d",
+                            SecurityStamp = "c8ac754367164f5d88147a0f58fbf945",
                             SpecializationId = 2,
                             TwoFactorEnabled = false,
                             UserName = "doctor4"
@@ -616,7 +619,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             Id = 6,
                             AccessFailedCount = 0,
                             BirthNumber = "900101/1234",
-                            ConcurrencyStamp = "247da5bc-c59f-40ef-b0ba-938430c9148f",
+                            ConcurrencyStamp = "a037be5a-9a37-4694-8c16-014b84fd5b18",
                             Email = "tomas.horak@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Tomáš",
@@ -624,10 +627,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "TOMAS.HORAK@EMAIL.CZ",
                             NormalizedUserName = "PACIENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBacwHfAQ8oysuC+yEOFP2TakEie2+73wHf89V+TJX+Ioy5NfCTZkS0U/P5kN7yjmg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "601111111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e47fba95c6b4e8f8db372a876ece98f",
+                            SecurityStamp = "e31f49e78c9842208d02434430c42343",
                             TwoFactorEnabled = false,
                             UserName = "patient1"
                         },
@@ -636,7 +639,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             Id = 7,
                             AccessFailedCount = 0,
                             BirthNumber = "950202/2345",
-                            ConcurrencyStamp = "8c6587d2-d464-46d9-828f-ef566c7c6c0a",
+                            ConcurrencyStamp = "1d74d165-6a7f-43df-b89c-30f08f3aceb7",
                             Email = "anna.mala@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Anna",
@@ -644,10 +647,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ANNA.MALA@EMAIL.CZ",
                             NormalizedUserName = "PACIENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK31Pd3GzmAcXrVtoSezhRdeqGp0l5c6Zl0IjUvn6vAeslrjG7bgOuN4jHqQBRDbZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "602222222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01fc56ad197349e5a5f8a5605cec8dda",
+                            SecurityStamp = "88390c5c7c9243e18c81feeb86277a26",
                             TwoFactorEnabled = false,
                             UserName = "patient2"
                         },
@@ -656,7 +659,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             Id = 8,
                             AccessFailedCount = 0,
                             BirthNumber = "880303/3456",
-                            ConcurrencyStamp = "e3527a4a-3b21-4daf-8eb1-4e69fe8a6d18",
+                            ConcurrencyStamp = "7900dbe2-54f4-4c77-a022-52a94694efbc",
                             Email = "karel.novotny@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Karel",
@@ -664,10 +667,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "KAREL.NOVOTNY@EMAIL.CZ",
                             NormalizedUserName = "PACIENT3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGDwHucn5uWF1684moFrwbqoaym+z0IHUiN+/EDQnXgz6HiEbGnaqFT136phybDc4g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "603333333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41d7fba66015490dae07df08701ee4ca",
+                            SecurityStamp = "76c3da1c81144103b0a0476e8530584e",
                             TwoFactorEnabled = false,
                             UserName = "patient3"
                         });

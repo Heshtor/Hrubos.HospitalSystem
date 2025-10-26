@@ -10,28 +10,28 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
             {
                 new DoctorPatient {
                     Id = 1,
-                    DoctorId = 1,
-                    PatientId = 1
+                    DoctorId = 2,
+                    PatientId = 6
                 },
                 new DoctorPatient {
                     Id = 2,
-                    DoctorId = 2,
-                    PatientId = 2
+                    DoctorId = 3,
+                    PatientId = 7
                 },
                 new DoctorPatient {
                     Id = 3,
-                    DoctorId = 3,
-                    PatientId = 3
+                    DoctorId = 4,
+                    PatientId = 8
                 },
                 new DoctorPatient {
                     Id = 4,
-                    DoctorId = 1,
-                    PatientId = 3
+                    DoctorId = 2,
+                    PatientId = 8
                 },
                 new DoctorPatient {
                     Id = 5,
-                    DoctorId = 4,
-                    PatientId = 2
+                    DoctorId = 5,
+                    PatientId = 7
                 }
             };
         }
