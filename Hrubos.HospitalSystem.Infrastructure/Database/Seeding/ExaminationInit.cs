@@ -11,7 +11,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new Examination {
                     Id = 1,
                     DateTime = DateTime.Now.AddDays(-10),
-                    Notes = "Kontrola tlaku",
+                    ProblemDescription = "Vysoký tlak",
                     ExaminationTypeId = 1,
                     PatientId = 6,
                     DoctorId = 2
@@ -19,7 +19,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new Examination {
                     Id = 2,
                     DateTime = DateTime.Now.AddDays(-5),
-                    Notes = "Krevní test",
+                    ProblemDescription = "Krevní test",
                     ExaminationTypeId = 3,
                     PatientId = 7,
                     DoctorId = 3
@@ -27,7 +27,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new Examination {
                     Id = 3,
                     DateTime = DateTime.Now.AddDays(-2),
-                    Notes = "Vyšetření kloubů",
+                    ProblemDescription = "Bolest kloubů",
                     ExaminationTypeId = 2,
                     PatientId = 8,
                     DoctorId = 4
@@ -35,7 +35,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new Examination {
                     Id = 4,
                     DateTime = DateTime.Now.AddDays(-8),
-                    Notes = "Vyšetření ruky",
+                    ProblemDescription = "Bolest zápěstí",
                     ExaminationTypeId = 2,
                     PatientId = 7,
                     DoctorId = 4

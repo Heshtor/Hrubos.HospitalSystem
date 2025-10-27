@@ -14,8 +14,6 @@ namespace Hrubos.HospitalSystem.Domain.Entities
         [Required]
         public DateTime DateTime { get; set; }
 
-        public DateTime? NextDose { get; set; }
-
         [ForeignKey(nameof(Patient))]
         public int PatientId { get; set; }
         public IUser<int>? Patient { get; set; }

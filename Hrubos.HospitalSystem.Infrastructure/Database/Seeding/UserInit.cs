@@ -52,7 +52,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    SpecializationId = 1
+                    SpecializationId = 1,
+                    MaxExaminationPerDay = 10
                 },
                 new User
                 {
@@ -73,7 +74,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    SpecializationId = 2
+                    SpecializationId = 2,
+                    MaxExaminationPerDay = 5
                 },
                 new User
                 {
@@ -94,7 +96,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    SpecializationId = 3
+                    SpecializationId = 3,
+                    MaxExaminationPerDay = 2
                 },
                 new User
                 {
@@ -115,7 +118,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    SpecializationId = 2
+                    SpecializationId = 2,
+                    MaxExaminationPerDay = 0
                 }
             };
         }

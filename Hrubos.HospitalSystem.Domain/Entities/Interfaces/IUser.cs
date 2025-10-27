@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Hrubos.HospitalSystem.Domain.Entities.Interfaces
+﻿namespace Hrubos.HospitalSystem.Domain.Entities.Interfaces
 {
     public interface IUser<TKey> : IEntity<TKey>
     {
@@ -10,5 +8,7 @@ namespace Hrubos.HospitalSystem.Domain.Entities.Interfaces
         string? FirstName { get; set; }
         string? LastName { get; set; }
         string? BirthNumber { get; set; }
+        int? SpecializationId { get; set; }
+        int? MaxExaminationPerDay { get; set; }
     }
 }

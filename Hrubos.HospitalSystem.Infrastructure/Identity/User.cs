@@ -10,6 +10,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Identity
         public virtual string? FirstName { get; set; }
         public virtual string? LastName { get; set; }
         public virtual string? BirthNumber { get; set; }
+        public virtual int? MaxExaminationPerDay { get; set; }
 
         [ForeignKey(nameof(Specialization))]
         public virtual int? SpecializationId { get; set; }

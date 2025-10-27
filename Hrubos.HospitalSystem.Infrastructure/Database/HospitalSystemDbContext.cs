@@ -16,6 +16,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
         public DbSet<ExaminationResult> ExaminationResults { get; set; }
         public DbSet<VaccineType> VaccineTypes { get; set; }
         public DbSet<Vaccination> Vaccinations { get; set; }
+        public DbSet<SystemSetting> SystemSettings { get; set; }
 
         public HospitalSystemDbContext(DbContextOptions options) : base(options)
         {
@@ -83,6 +84,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
 
             modelBuilder.Entity<VaccineType>().HasData(new VaccineTypeInit().GenerateVaccineTypes());
             modelBuilder.Entity<Vaccination>().HasData(new VaccinationInit().GenerateVaccinations());
+
+            modelBuilder.Entity<SystemSetting>().HasData(new SystemSettingInit().GenerateSystemSettings());
         }
     }
 }
