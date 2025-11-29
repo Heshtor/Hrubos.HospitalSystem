@@ -26,6 +26,11 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
         {
             base.OnModelCreating(modelBuilder);
 
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.SetTableName(entity.GetTableName()?.Replace("AspNet", String.Empty));
+            }
+
 
             modelBuilder.Entity<Specialization>()
                 .HasMany<User>(s => s.Doctors as IList<User>)
