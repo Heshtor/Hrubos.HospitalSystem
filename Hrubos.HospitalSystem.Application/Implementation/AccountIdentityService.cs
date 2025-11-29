@@ -8,8 +8,8 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 {
     public class AccountIdentityService : IAccountIdentityService
     {
-        UserManager<User> userManager;
-        SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
         public AccountIdentityService(UserManager<User> userManager, SignInManager<User> signInManager)
         {

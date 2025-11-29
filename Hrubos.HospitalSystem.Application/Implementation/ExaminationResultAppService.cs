@@ -1,13 +1,14 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
     public class ExaminationResultAppService : IExaminationResultAppService
     {
-        HospitalSystemDbContext _hospitalSystemDbContext;
-        IFileUploadService _fileUploadService;
+        private readonly HospitalSystemDbContext _hospitalSystemDbContext;
+        private readonly IFileUploadService _fileUploadService;
 
         public ExaminationResultAppService(HospitalSystemDbContext hospitalSystemDbContext, IFileUploadService fileUploadService)
         {
@@ -17,7 +18,22 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public IList<ExaminationResult> SelectAll()
         {
-            return _hospitalSystemDbContext.ExaminationResults.ToList();
+            return _hospitalSystemDbContext.ExaminationResults
+                .Include(er => er.Examination)
+                .ToList();
+        }
+
+        public IList<ExaminationResult> SelectForExamination(int examinationId)
+        {
+            return _hospitalSystemDbContext.ExaminationResults
+                .Where(er => er.ExaminationId == examinationId)
+                .Include(er => er.Examination)
+                .ToList();
+        }
+
+        public IList<Examination> SelectAllExaminations()
+        {
+            return _hospitalSystemDbContext.Examinations.ToList();
         }
 
         public void Create(ExaminationResult examinationResult)
@@ -48,11 +64,6 @@ namespace Hrubos.HospitalSystem.Application.Implementation
             return deleted;
         }
 
-        public ExaminationResult GetById(int id)
-        {
-            return _hospitalSystemDbContext.ExaminationResults.FirstOrDefault(e => e.Id == id);
-        }
-
         public bool Edit(int id, ExaminationResult newExaminationResult)
         {
             var examinationResult = GetById(id);
@@ -72,6 +83,11 @@ namespace Hrubos.HospitalSystem.Application.Implementation
             _hospitalSystemDbContext.SaveChanges();
 
             return true;
+        }
+
+        public ExaminationResult GetById(int id)
+        {
+            return _hospitalSystemDbContext.ExaminationResults.FirstOrDefault(e => e.Id == id);
         }
     }
 }

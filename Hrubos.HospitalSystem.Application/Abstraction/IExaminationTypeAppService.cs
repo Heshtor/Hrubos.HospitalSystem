@@ -7,7 +7,7 @@ namespace Hrubos.HospitalSystem.Application.Abstraction
         IList<ExaminationType> SelectAll();
         void Create(ExaminationType examinationType);
         bool Delete(int id);
-        ExaminationType GetById(int id);
         bool Edit(int id, ExaminationType examinationType);
+        ExaminationType GetById(int id);
     }
 }

@@ -5,9 +5,11 @@ namespace Hrubos.HospitalSystem.Application.Abstraction
 {
     public interface ISecurityIdentityService
     {
-        Task<User> FindUserByUsername(string username);
-        Task<User> FindUserByEmail(string email);
-        Task<IList<string>> GetUserRoles(User user);
-        Task<User> GetCurrentUser(ClaimsPrincipal principal);
+        Task<List<User>> GetAllUsersAsync();
+        Task<IList<string>> GetRolesAsync(string userId);
+        Task<User> GetUserByIdAsync(string userId);
+        Task<User> GetCurrentUserAsync(ClaimsPrincipal principal);
+        Task<bool> EditUserAsync(User user);
+        Task<bool> DeleteUserAsync(string userId);
     }
 }

@@ -1,37 +1,60 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using Hrubos.HospitalSystem.Application.Abstraction;
+﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
     public class SecurityIdentityService : ISecurityIdentityService
     {
-        UserManager<User> userManager;
+        private readonly UserManager<User> _userManager;
 
         public SecurityIdentityService(UserManager<User> userManager)
         {
-            this.userManager = userManager;
+            _userManager = userManager;
         }
 
-        public Task<User> FindUserByEmail(string email)
+        public async Task<List<User>> GetAllUsersAsync()
         {
-            return userManager.FindByEmailAsync(email);
+            return await _userManager.Users.ToListAsync();
         }
 
-        public Task<User> FindUserByUsername(string username)
+        public async Task<IList<string>> GetRolesAsync(string userId)
         {
-            return userManager.FindByNameAsync(username);
+            var user = await GetUserByIdAsync(userId);
+            if (user != null)
+            {
+                return await _userManager.GetRolesAsync(user);
+            }
+            return new List<string>();
         }
 
-        public Task<IList<string>> GetUserRoles(User user)
+        public async Task<User> GetUserByIdAsync(string userId)
         {
-            return userManager.GetRolesAsync(user);
+            return await _userManager.FindByIdAsync(userId);
         }
 
-        public Task<User> GetCurrentUser(ClaimsPrincipal principal)
+        public async Task<User> GetCurrentUserAsync(ClaimsPrincipal principal)
         {
-            return userManager.GetUserAsync(principal);
+            return await _userManager.GetUserAsync(principal);
+        }
+
+        public async Task<bool> EditUserAsync(User user)
+        {
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }
+
+        public async Task<bool> DeleteUserAsync(string userId)
+        {
+            var user = await GetUserByIdAsync(userId);
+            if (user != null)
+            {
+                var result = await _userManager.DeleteAsync(user);
+                return result.Succeeded;
+            }
+            return false;
         }
     }
 }

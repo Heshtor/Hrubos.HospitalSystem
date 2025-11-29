@@ -6,7 +6,7 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 {
     public class ExaminationTypeAppService : IExaminationTypeAppService
     {
-        HospitalSystemDbContext _hospitalSystemDbContext;
+        private readonly HospitalSystemDbContext _hospitalSystemDbContext;
 
         public ExaminationTypeAppService(HospitalSystemDbContext hospitalSystemDbContext)
         {
@@ -40,25 +40,24 @@ namespace Hrubos.HospitalSystem.Application.Implementation
             return deleted;
         }
 
+        public bool Edit(int id, ExaminationType newExaminationType)
+        {
+            var examinationType = GetById(id);
+
+            if (examinationType == null)
+            {
+                return false;
+            }
+
+            _hospitalSystemDbContext.Entry(examinationType).CurrentValues.SetValues(newExaminationType);
+            _hospitalSystemDbContext.SaveChanges();
+
+            return true;
+        }
+
         public ExaminationType GetById(int id)
         {
             return _hospitalSystemDbContext.ExaminationTypes.FirstOrDefault(e => e.Id == id);
-        }
-
-        public bool Edit(int id, ExaminationType newExaminationType)
-        {
-            bool updated = false;
-
-            var examinationType = GetById(id);
-
-            if (examinationType != null)
-            {
-                _hospitalSystemDbContext.Entry(examinationType).CurrentValues.SetValues(newExaminationType);
-                _hospitalSystemDbContext.SaveChanges();
-                updated = true;
-            }
-
-            return updated;
         }
     }
 }
