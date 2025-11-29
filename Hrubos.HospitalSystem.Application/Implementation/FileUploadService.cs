@@ -16,9 +16,8 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         {
             string filePathOutput = String.Empty;
 
-            //var fileName = Path.GetFileNameWithoutExtension(fileToUpload.FileName);
             var fileExtension = Path.GetExtension(fileToUpload.FileName);
-            var fileNameGenerated = Path.GetRandomFileName();
+            var fileNameGenerated = Guid.NewGuid().ToString();
 
             var fileRelative = Path.Combine(folderNameOnServer, fileNameGenerated + fileExtension);
             var filePath = Path.Combine(this.RootPath, fileRelative);

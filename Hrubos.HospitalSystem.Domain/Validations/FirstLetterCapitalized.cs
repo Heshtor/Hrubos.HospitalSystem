@@ -25,7 +25,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
                 }
                 else
                 {
-                    return new ValidationResult($"Pole {validationContext.MemberName} neobsahuje první písmeno velké.123");
+                    return new ValidationResult($"Pole {validationContext.MemberName} neobsahuje první písmeno velké.");
                 }
             }
             else

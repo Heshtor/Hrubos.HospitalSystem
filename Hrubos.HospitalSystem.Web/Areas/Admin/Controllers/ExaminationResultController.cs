@@ -31,8 +31,12 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(ExaminationResult examinationResult)
         {
-            _examinationResultAppService.Create(examinationResult);
+            if (!ModelState.IsValid)
+            {
+                return View(examinationResult);
+            }
 
+            _examinationResultAppService.Create(examinationResult);
             return RedirectToAction(nameof(Select));
         }
 
@@ -66,6 +70,11 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(int id, ExaminationResult examinationResult)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(examinationResult);
+            }
+
             bool updated = _examinationResultAppService.Edit(id, examinationResult);
 
             if (updated)

@@ -55,21 +55,23 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public bool Edit(int id, ExaminationResult newExaminationResult)
         {
-            bool updated = false;
-
             var examinationResult = GetById(id);
 
-            if (examinationResult != null && newExaminationResult.Attachment != null)
+            if (examinationResult == null)
+            {
+                return false;
+            }
+
+            if (newExaminationResult.Attachment != null)
             {
                 string attachmentSrc = _fileUploadService.FileUpload(newExaminationResult.Attachment, Path.Combine("attachments", "examinationResults"));
                 newExaminationResult.AttachmentSrc = attachmentSrc;
-
-                _hospitalSystemDbContext.Entry(examinationResult).CurrentValues.SetValues(newExaminationResult);
-                _hospitalSystemDbContext.SaveChanges();
-                updated = true;
             }
 
-            return updated;
+            _hospitalSystemDbContext.Entry(examinationResult).CurrentValues.SetValues(newExaminationResult);
+            _hospitalSystemDbContext.SaveChanges();
+
+            return true;
         }
     }
 }
