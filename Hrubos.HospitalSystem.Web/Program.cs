@@ -52,6 +52,7 @@ builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>(
 builder.Services.AddScoped<IExaminationTypeAppService, ExaminationTypeAppService>();
 builder.Services.AddScoped<IExaminationResultAppService, ExaminationResultAppService>();
 builder.Services.AddScoped<IAccountIdentityService, AccountIdentityService>();
+builder.Services.AddScoped<ISecurityIdentityService, SecurityIdentityService>();
 
 var app = builder.Build();
 
