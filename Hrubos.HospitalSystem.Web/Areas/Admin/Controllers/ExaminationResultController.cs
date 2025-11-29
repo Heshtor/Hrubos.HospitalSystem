@@ -10,14 +10,18 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doctor))]
     public class ExaminationResultController : Controller
     {
-        IExaminationResultAppService _examinationResultAppService;
-        public ExaminationResultController(IExaminationResultAppService examinationResultAppService)
+        private readonly IExaminationResultAppService _examinationResultAppService;
+        private readonly ILogger<ExaminationResultController> _logger;
+
+        public ExaminationResultController(IExaminationResultAppService examinationResultAppService, ILogger<ExaminationResultController> logger)
         {
             _examinationResultAppService = examinationResultAppService;
+            _logger = logger;
         }
 
         public IActionResult Select()
         {
+            _logger.LogInformation("Uživatel zobrazil seznam výsledků vyšetření.");
             var examinationResults = _examinationResultAppService.SelectAll();
             return View(examinationResults);
         }
@@ -33,11 +37,21 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogWarning("Vytvoření výsledku vyšetření selhalo kvůli validaci.");
                 return View(examinationResult);
             }
 
-            _examinationResultAppService.Create(examinationResult);
-            return RedirectToAction(nameof(Select));
+            try
+            {
+                _examinationResultAppService.Create(examinationResult);
+                _logger.LogInformation("Vytvořen nový výsledek vyšetření pro pacienta s ID {ExaminationId}", examinationResult.ExaminationId);
+                return RedirectToAction(nameof(Select));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Chyba při ukládání výsledku vyšetření.");
+                return View("Error");
+            }
         }
 
         public IActionResult Delete(int id)
@@ -46,10 +60,12 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 
             if (deleted)
             {
+                _logger.LogInformation("Smazán výsledek vyšetření s ID {id}.", id);
                 return RedirectToAction(nameof(Select));
             }
             else
             {
+                _logger.LogWarning("Pokus o smazání neexistujícího výsledku vyšetření s ID {id}.", id);
                 return NotFound();
             }
         }
@@ -72,6 +88,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogWarning("Editace výsledku vyšetření s ID {id} selhala kvůli validaci.", id);
                 return View(examinationResult);
             }
 
@@ -79,10 +96,12 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 
             if (updated)
             {
+                _logger.LogInformation("Editace výsledku vyšetření s ID {id} proběhla úspěšně.", id);
                 return RedirectToAction(nameof(Select));
             }
             else
             {
+                _logger.LogWarning("Pokus o editaci neexistujícího výsledku vyšetření s ID {id}.", id);
                 return NotFound();
             }
         }

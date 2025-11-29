@@ -4,8 +4,14 @@ using Hrubos.HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
+using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Nastavení Serilogu - naètení konfigurace z appsettings.json
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
