@@ -13,7 +13,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     Id = 1,
                     Description = "vše v pořádku",
                     Values = "TK: 120/80, Puls: 72",
-                    Attachment = null,
+                    AttachmentSrc = null,
                     ExaminationId = 1
                 },
                 new ExaminationResult
@@ -21,7 +21,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     Id = 2,
                     Description = "lehká anémie",
                     Values = "Hemoglobin: 110 g/l, Hct: 33%",
-                    Attachment = null,
+                    AttachmentSrc = null,
                     ExaminationId = 2
                 },
                 new ExaminationResult
@@ -29,7 +29,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     Id = 3,
                     Description = "artritida kolene",
                     Values = "RTG: mírná artritida, rentgenový snímek v příloze",
-                    Attachment = "cloub_knee_xray.jpg",
+                    AttachmentSrc = "\\attachments\\examinationResults\\cloub_knee_xray.jpg",
                     ExaminationId = 3
                 }
             };

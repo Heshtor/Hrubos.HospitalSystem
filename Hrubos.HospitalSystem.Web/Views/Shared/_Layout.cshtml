@@ -41,6 +41,13 @@
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="ExaminationType" asp-action="Select">Typy vyšetření</a>
                             </li>
                         }
+
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.Doctor))))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="ExaminationResult" asp-action="Select">Výsledky vyšetření</a>
+                            </li>
+                        }
                     </ul>
 
                     @{

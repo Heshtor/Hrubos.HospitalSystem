@@ -41,8 +41,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 //registrace služeb aplikaèní vrstvy
+builder.Services.AddScoped<IFileUploadService, FileUploadService>(serviceProvider => new FileUploadService(serviceProvider.GetService<IWebHostEnvironment>().WebRootPath));
 builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>();
 builder.Services.AddScoped<IExaminationTypeAppService, ExaminationTypeAppService>();
+builder.Services.AddScoped<IExaminationResultAppService, ExaminationResultAppService>();
 builder.Services.AddScoped<IAccountIdentityService, AccountIdentityService>();
 
 var app = builder.Build();

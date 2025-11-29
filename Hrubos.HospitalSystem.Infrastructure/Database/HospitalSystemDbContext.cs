@@ -34,13 +34,13 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Examination>()
-                .HasOne(e => e.Patient as User)
+                .HasOne<User>(e => e.Patient as User)
                 .WithMany(u => u.PatientExaminations)
                 .HasForeignKey(e => e.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Examination>()
-                .HasOne(e => e.Doctor as User)
+                .HasOne<User>(e => e.Doctor as User)
                 .WithMany(u => u.DoctorExaminations)
                 .HasForeignKey(e => e.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -52,13 +52,13 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DoctorPatient>()
-                .HasOne(dp => dp.Doctor as User)
+                .HasOne<User>(dp => dp.Doctor as User)
                 .WithMany(u => u.DoctorPatients)
                 .HasForeignKey(dp => dp.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DoctorPatient>()
-                .HasOne(dp => dp.Patient as User)
+                .HasOne<User>(dp => dp.Patient as User)
                 .WithMany(u => u.PatientDoctors)
                 .HasForeignKey(dp => dp.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
