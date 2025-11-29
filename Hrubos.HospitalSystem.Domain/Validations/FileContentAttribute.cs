@@ -13,7 +13,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
             _allowedContentTypes = allowedContentTypes;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value == null)
             {
@@ -28,11 +28,11 @@ namespace Hrubos.HospitalSystem.Domain.Validations
                 if (valid)
                     return ValidationResult.Success;
 
-                return new ValidationResult($"The {validationContext.MemberName} field must be one of the following types: {string.Join(", ", _allowedContentTypes)}.");
+                return new ValidationResult($"Pole {validationContext.MemberName} musí být jeden z těcho typů: {string.Join(", ", _allowedContentTypes)}.");
             }
             else
             {
-                throw new NotImplementedException($"The {nameof(FileContentAttribute)} is not implemented for the type: {value.GetType()}");
+                throw new NotImplementedException($"Atribut {nameof(FileContentAttribute)} není implementován pro typ: {value.GetType()}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
             if (!context.Attributes.ContainsKey("data-val"))
                 context.Attributes.Add("data-val", "true");
 
-            context.Attributes.Add("data-val-filecontent", $"The {context.ModelMetadata.Name} field must be one of the following types: {string.Join(", ", _allowedContentTypes)}.");
+            context.Attributes.Add("data-val-filecontent", $"Pole {context.ModelMetadata.Name} musí být jeden z těcho typů: {string.Join(", ", _allowedContentTypes)}.");
             context.Attributes.Add("data-val-filecontent-types", string.Join(",", _allowedContentTypes));
         }
     }

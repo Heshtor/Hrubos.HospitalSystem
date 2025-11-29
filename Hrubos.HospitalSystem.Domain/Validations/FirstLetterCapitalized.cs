@@ -6,7 +6,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class FirstLetterCapitalizedAttribute : ValidationAttribute, IClientModelValidator
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value == null)
             {
@@ -15,7 +15,9 @@ namespace Hrubos.HospitalSystem.Domain.Validations
             else if (value is string text)
             {
                 if (text == String.Empty)
+                {
                     return ValidationResult.Success;
+                }
 
                 if (char.IsUpper(text.First()))
                 {
@@ -23,12 +25,12 @@ namespace Hrubos.HospitalSystem.Domain.Validations
                 }
                 else
                 {
-                    return new ValidationResult($"The {validationContext.MemberName} field does not contain the first capital letter.");
+                    return new ValidationResult($"Pole {validationContext.MemberName} neobsahuje první písmeno velké.123");
                 }
             }
             else
             {
-                throw new NotImplementedException($"The {nameof(FirstLetterCapitalizedAttribute)} is not implemented for the type: {value.GetType()}");
+                throw new NotImplementedException($"Atribut {nameof(FirstLetterCapitalizedAttribute)} není implemetován pro typ: {value.GetType()}");
             }
         }
 
@@ -36,7 +38,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
         {
             if (context.Attributes.ContainsKey("data-val") == false)
                 context.Attributes.Add("data-val", "true");
-            context.Attributes.Add("data-val-firstlettercap", $"The {context.ModelMetadata.Name} field does not contain the first capital letter.");
+            context.Attributes.Add("data-val-firstlettercap", $"Pole {context.ModelMetadata.Name} neobsahuje první písmeno velké.");
         }
     }
 }
