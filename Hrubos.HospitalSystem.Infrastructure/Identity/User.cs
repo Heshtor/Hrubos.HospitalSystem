@@ -1,5 +1,6 @@
 ﻿using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Domain.Entities.Interfaces;
+using Hrubos.HospitalSystem.Domain.Validations;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Identity
     {
         public virtual string? FirstName { get; set; }
         public virtual string? LastName { get; set; }
+        [BirthNumber]
         public virtual string? BirthNumber { get; set; }
         public virtual int? MaxExaminationPerDay { get; set; }
 
