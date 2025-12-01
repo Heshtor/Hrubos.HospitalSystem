@@ -62,6 +62,11 @@ builder.Services.AddScoped<IFileUploadService, FileUploadService>(serviceProvide
 builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>();
 builder.Services.AddScoped<IExaminationTypeAppService, ExaminationTypeAppService>();
 builder.Services.AddScoped<IExaminationResultAppService, ExaminationResultAppService>();
+builder.Services.AddScoped<IExaminationAppService, ExaminationAppService>();
+builder.Services.AddScoped<ISystemSettingsAppService, SystemSettingsAppService>();
+builder.Services.AddScoped<IVaccinationAppService, VaccinationAppService>();
+builder.Services.AddScoped<IVaccineTypeAppService, VaccineTypeAppService>();
+builder.Services.AddScoped<IDoctorPatientAppService, DoctorPatientAppService>();
 builder.Services.AddScoped<IAccountIdentityService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityIdentityService, SecurityIdentityService>();
 
