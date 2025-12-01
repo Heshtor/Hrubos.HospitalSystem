@@ -8,7 +8,9 @@ namespace Hrubos.HospitalSystem.Infrastructure.Identity
 {
     public class User : IdentityUser<int>, IUser<int>
     {
+        [FirstLetterCapitalized]
         public virtual string? FirstName { get; set; }
+        [FirstLetterCapitalized]
         public virtual string? LastName { get; set; }
         [BirthNumber]
         public virtual string? BirthNumber { get; set; }
