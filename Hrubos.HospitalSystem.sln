@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Web", "Hrubos.HospitalSystem.Web\Hrubos.HospitalSystem.Web.csproj", "{338C6092-C37C-4EF4-9B4E-34778BAA0690}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Infrastructure", "Hrubos.HospitalSystem.Infrastructure\Hrubos.HospitalSystem.Infrastructure.csproj", "{059417C5-3EAD-4CBD-A99D-3ED645AF4F89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Application", "Hrubos.HospitalSystem.Application\Hrubos.HospitalSystem.Application.csproj", "{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hrubos.HospitalSystem.Tests", "Hrubos.HospitalSystem.Tests\Hrubos.HospitalSystem.Tests.csproj", "{231C9082-63C5-412E-B35D-60FA00285843}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D61FEA6-ACF6-4B33-B8E8-321038CCE1C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231C9082-63C5-412E-B35D-60FA00285843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231C9082-63C5-412E-B35D-60FA00285843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231C9082-63C5-412E-B35D-60FA00285843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231C9082-63C5-412E-B35D-60FA00285843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
