@@ -1,6 +1,7 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
@@ -15,7 +16,9 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public IList<VaccineType> SelectAll()
         {
-            return _hospitalSystemDbContext.VaccineTypes.ToList();
+            return _hospitalSystemDbContext.VaccineTypes
+                .Include(vt => vt.Vaccinations)
+                .ToList();
         }
 
         public void Create(VaccineType vaccineType)

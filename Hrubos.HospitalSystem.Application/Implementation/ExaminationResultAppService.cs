@@ -23,19 +23,6 @@ namespace Hrubos.HospitalSystem.Application.Implementation
                 .ToList();
         }
 
-        public IList<ExaminationResult> SelectForExamination(int examinationId)
-        {
-            return _hospitalSystemDbContext.ExaminationResults
-                .Where(er => er.ExaminationId == examinationId)
-                .Include(er => er.Examination)
-                .ToList();
-        }
-
-        public IList<Examination> SelectAllExaminations()
-        {
-            return _hospitalSystemDbContext.Examinations.ToList();
-        }
-
         public void Create(ExaminationResult examinationResult)
         {
             if (examinationResult.Attachment != null)

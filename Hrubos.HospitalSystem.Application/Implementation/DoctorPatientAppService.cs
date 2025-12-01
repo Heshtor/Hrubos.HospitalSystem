@@ -1,6 +1,7 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
@@ -15,7 +16,10 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public IList<DoctorPatient> SelectAll()
         {
-            return _hospitalSystemDbContext.DoctorPatients.ToList();
+            return _hospitalSystemDbContext.DoctorPatients
+                .Include(dp => dp.Doctor)
+                .Include(dp => dp.Patient)
+                .ToList();
         }
 
         public void Create(DoctorPatient doctorPatient)
