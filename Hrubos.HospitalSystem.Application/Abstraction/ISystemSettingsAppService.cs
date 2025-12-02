@@ -9,5 +9,6 @@ namespace Hrubos.HospitalSystem.Application.Abstraction
         bool Delete(int id);
         bool Edit(int id, SystemSetting systemSetting);
         SystemSetting GetById(int id);
+        int GetIntValue(string key, int defaultValue);
     }
 }

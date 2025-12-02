@@ -8,10 +8,12 @@ namespace Hrubos.HospitalSystem.Application.Implementation
     public class VaccinationAppService : IVaccinationAppService
     {
         private readonly HospitalSystemDbContext _hospitalSystemDbContext;
+        private readonly ISystemSettingsAppService _systemSettingsAppService;
 
-        public VaccinationAppService(HospitalSystemDbContext hospitalSystemDbContext)
+        public VaccinationAppService(HospitalSystemDbContext hospitalSystemDbContext, ISystemSettingsAppService systemSettingsAppService)
         {
             _hospitalSystemDbContext = hospitalSystemDbContext;
+            _systemSettingsAppService = systemSettingsAppService;
         }
 
         public IList<Vaccination> SelectAll()
@@ -24,6 +26,18 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public void Create(Vaccination vaccination)
         {
+            // Denní limit očkování
+            int maxDailyLimit = _systemSettingsAppService.GetIntValue("MaxVaccinationsPerDay", 20);
+
+            // Počet registrovaných očkování pro daný den
+            int currentCount = _hospitalSystemDbContext.Vaccinations.Count(v => v.DateTime.Date == vaccination.DateTime.Date);
+
+            // Kontrola kapacity
+            if (currentCount >= maxDailyLimit)
+            {
+                throw new InvalidOperationException($"Kapacita očkování pro datum {vaccination.DateTime.ToShortDateString()} je již naplněna (Limit: {maxDailyLimit}).");
+            }
+
             _hospitalSystemDbContext.Vaccinations.Add(vaccination);
             _hospitalSystemDbContext.SaveChanges();
         }

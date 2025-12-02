@@ -1,6 +1,7 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
@@ -58,6 +59,18 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         public SystemSetting GetById(int id)
         {
             return _hospitalSystemDbContext.SystemSettings.FirstOrDefault(e => e.Id == id);
+        }
+
+        public int GetIntValue(string key, int defaultValue = 0)
+        {
+            var setting = _hospitalSystemDbContext.SystemSettings.FirstOrDefault(s => s.Key == key);
+
+            if (setting != null && int.TryParse(setting.Value, out int result))
+            {
+                return result;
+            }
+
+            return defaultValue; // pokud neexistuje nebo není číslo, vrátím default hodnotu
         }
     }
 }
