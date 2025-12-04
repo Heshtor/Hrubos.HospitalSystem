@@ -3,24 +3,21 @@
     ViewData["Title"] = "Chyba";
 }
 
-@section Styles
-{
-    <link rel="stylesheet" href="~/css/error.min.css" />
-}
-
 <section>
-    <h1 class="text-danger">Něco se pokazilo.</h1>
-    <h2 class="text-danger">Omlouváme se, při zpracování vašeho požadavku došlo k neočekávané chybě.</h2>
+    <h2>Něco se pokazilo 🫤</h2>
 
+    <p>Omlouváme se, při zpracování vašeho požadavku došlo k neočekávané chybě.</p>
     <p>Zkuste akci opakovat později, nebo se vraťte na úvodní stránku.</p>
 
     @if (Model.ShowRequestId)
     {
-        <div class="alert alert-warning" style="display: inline-block; margin-top: 20px; padding: 15px; border: 1px solid #d3d3d3; border-radius: 5px;">
-            <p style="margin: 0;">Pokud budete kontaktovat technickou podporu, uveďte prosím toto ID:</p>
-            <code style="font-size: 1.2em; font-weight: bold;">@Model.RequestId</code>
-        </div>
+        <br />
+        <p>Pokud budete kontaktovat technickou podporu, uveďte prosím toto ID:</p>
+        <p style="font-weight: bold; border: 2px solid red; padding: 6px; width: max-content;">@Model.RequestId</p>
     }
 
-    <a class="btn" asp-area="" asp-controller="Home" asp-action="Index">Zpátky domů</a>
+    <br />
+    <div class="button-center">
+        <a class="button" asp-area="" asp-controller="Home" asp-action="Index">Zpátky domů</a>
+    </div>
 </section>
