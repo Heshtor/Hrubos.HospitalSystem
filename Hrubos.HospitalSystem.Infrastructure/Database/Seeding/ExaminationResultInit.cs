@@ -21,7 +21,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     Id = 2,
                     Description = "lehká anémie",
                     Values = "Hemoglobin: 110 g/l, Hct: 33%",
-                    AttachmentSrc = null,
+                    AttachmentSrc = "\\attachments\\examinationResults\\erecept.png",
                     ExaminationId = 2
                 },
                 new ExaminationResult
@@ -29,7 +29,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     Id = 3,
                     Description = "artritida kolene",
                     Values = "RTG: mírná artritida, rentgenový snímek v příloze",
-                    AttachmentSrc = "\\attachments\\examinationResults\\cloub_knee_xray.jpg",
+                    AttachmentSrc = "\\attachments\\examinationResults\\rentgen.pdf",
                     ExaminationId = 3
                 }
             };
