@@ -1,0 +1,74 @@
+﻿<header class="header" id="navbar">
+    <div class="logo">
+        <a asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/images/Pingu.jpg" alt="logo" />
+            <span class="logoName">Nemocniční systém</span>
+        </a>
+    </div>
+
+    <nav class="navigation">
+        <ul class="navList">
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <span class="linksName">Privacy</span>
+                </a>
+            </li>
+
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Patient")))
+            {
+                <li>
+                    <a asp-area="Patient" asp-controller="Home" asp-action="Index">
+                        <span class="linksName">Pacient panel</span>
+                    </a>
+                </li>
+            }
+
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Doctor")))
+            {
+                <li>
+                    <a asp-area="Doctor" asp-controller="Home" asp-action="Index">
+                        <span class="linksName">Doktor panel</span>
+                    </a>
+                </li>
+            }
+
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+            {
+                <li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                        <span class="linksName">Admin panel</span>
+                    </a>
+                </li>
+            }
+
+            <div class="buttons">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Register" title="zaregistrovat se">
+                            <i class='bx bx-plus-circle'></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Login" title="přihlásit se">
+                            <i class='bx bx-log-in'></i>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <span class="linksName">Přihlášen jako @User.Identity.Name</span>
+                    </li>
+
+                    <li>                 
+                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Logout" title="odhlásit se">
+                            <i class='bx bx-log-out'></i>
+                        </a>
+                    </li>
+                }
+            </div>
+        </ul>
+    </nav>
+</header>

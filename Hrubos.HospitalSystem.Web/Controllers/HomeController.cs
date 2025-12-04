@@ -6,13 +6,6 @@ namespace Hrubos.HospitalSystem.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -24,9 +17,15 @@ namespace Hrubos.HospitalSystem.Web.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int? statusCode = null)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode.HasValue && statusCode.Value == 404)
+            {
+                return View("NotFound");
+            }
+
+            // Pokud statusCode je null, znamená to, že to spadlo na nìjakou výjimku
+            return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
         }
     }
 }

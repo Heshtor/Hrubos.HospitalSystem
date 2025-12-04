@@ -1,0 +1,14 @@
+[
+  {
+    "outputFile": "wwwroot/css/global.css",
+    "inputFile": "wwwroot/css/global.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/navbar.css",
+    "inputFile": "Views/Shared/_Navbar.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/footer.css",
+    "inputFile": "Views/Shared/_Footer.scss"
+  }
+]

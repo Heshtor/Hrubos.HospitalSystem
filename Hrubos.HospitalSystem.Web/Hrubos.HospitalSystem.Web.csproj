@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,6 +21,11 @@
     <ProjectReference Include="..\Hrubos.HospitalSystem.Application\Hrubos.HospitalSystem.Application.csproj" />
     <ProjectReference Include="..\Hrubos.HospitalSystem.Domain\Hrubos.HospitalSystem.Domain.csproj" />
     <ProjectReference Include="..\Hrubos.HospitalSystem.Infrastructure\Hrubos.HospitalSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\attachments\examinationResults\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
