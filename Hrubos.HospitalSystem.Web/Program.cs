@@ -5,13 +5,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
 using Serilog;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (builder.Environment.IsProduction())
+{
+    // Naèítá statické webové prostøedky (CSS/JS/obrázky) pro produkèní prostøedí bìhem vývoje, i když není aplikace publikována.
+    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+}
+
 // Nastavení Serilogu - naètení konfigurace z appsettings.json
 builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
+    configuration.ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -20,7 +28,7 @@ var connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.43");
 builder.Services.AddDbContext<HospitalSystemDbContext>(options => options.UseMySql(connectionString, serverVersion));
 
-//Configuration for Identity
+// Configuration for Identity
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<HospitalSystemDbContext>().AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -43,7 +51,20 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     options.LoginPath = "/Security/Account/Login";
     options.LogoutPath = "/Security/Account/Logout";
+    options.AccessDeniedPath = "/Security/Account/AccessDenied";
     options.SlidingExpiration = true;
+
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        // vytvoøení nové URI s pøidaným parametrem authorize=false
+        var uriBuilder = new UriBuilder(context.RedirectUri);
+        var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+        query["authorize"] = "false";
+        uriBuilder.Query = query.ToString();
+        context.RedirectUri = uriBuilder.ToString();
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
 });
 
 // configuration of session
@@ -75,10 +96,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");
 
 app.UseHttpsRedirection();
 
@@ -87,18 +110,37 @@ app.UseSession();
 
 app.UseRouting();
 
+// Omezení logování pouze na chyby
+app.UseSerilogRequestLogging(configure =>
+{
+    configure.GetLevel = (httpContext, elapsed, ex) =>
+    {
+        // Pokud nastala chyba (výjimka nebo kód 500+), loguji to jako ERROR
+        if (ex != null || httpContext.Response.StatusCode > 499)
+        {
+            return Serilog.Events.LogEventLevel.Error;
+        }
+
+        // Všechno ostatní (2xx, 3xx, 4xx, obrázky) se logovat nebude
+        return Serilog.Events.LogEventLevel.Verbose;
+    };
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
+// routes pro area stránky
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+// routes pro stránky bez area
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{action=Index}/{id?}",
+    defaults: new { controller = "Home" })
     .WithStaticAssets();
 
 
