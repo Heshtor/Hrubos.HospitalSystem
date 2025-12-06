@@ -20,7 +20,7 @@ namespace Hrubos.HospitalSystem.Domain.Entities
         public IFormFile? Attachment { get; set; }
 
         [ForeignKey(nameof(Examination))]
-        public int ExaminationId { get; set; }
+        public int? ExaminationId { get; set; }
 
         public Examination? Examination { get; set; }
     }

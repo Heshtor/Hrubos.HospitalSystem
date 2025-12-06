@@ -8,14 +8,14 @@ namespace Hrubos.HospitalSystem.Domain.Entities
     public class Vaccination : Entity<int>
     {
         [ForeignKey(nameof(VaccineType))]
-        public int VaccineTypeId { get; set; }
+        public int? VaccineTypeId { get; set; }
         public VaccineType? VaccineType { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
 
         [ForeignKey(nameof(Patient))]
-        public int PatientId { get; set; }
+        public int? PatientId { get; set; }
         public IUser<int>? Patient { get; set; }
     }
 }

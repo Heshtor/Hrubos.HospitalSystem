@@ -36,37 +36,37 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database
                 .HasMany<User>(s => s.Doctors as IList<User>)
                 .WithOne(u => u.Specialization)
                 .HasForeignKey(u => u.SpecializationId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Examination>()
                 .HasOne<User>(e => e.Patient as User)
                 .WithMany(u => u.PatientExaminations)
                 .HasForeignKey(e => e.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Examination>()
                 .HasOne<User>(e => e.Doctor as User)
                 .WithMany(u => u.DoctorExaminations)
                 .HasForeignKey(e => e.DoctorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Vaccination>()
                 .HasOne<User>(e => e.Patient as User)
                 .WithMany(u => u.Vaccinations)
                 .HasForeignKey(e => e.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<DoctorPatient>()
                 .HasOne<User>(dp => dp.Doctor as User)
                 .WithMany(u => u.DoctorPatients)
                 .HasForeignKey(dp => dp.DoctorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<DoctorPatient>()
                 .HasOne<User>(dp => dp.Patient as User)
                 .WithMany(u => u.PatientDoctors)
                 .HasForeignKey(dp => dp.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Specialization>().HasData(new SpecializationInit().GenerateSpecializations());
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(HospitalSystemDbContext))]
-    [Migration("20251026231827_mysql_1.0.4_all_seeding")]
-    partial class mysql_104_all_seeding
+    [Migration("20251206174154_mysql_1.0.0_new_initial")]
+    partial class mysql_100_new_initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,17 +91,17 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExaminationTypeId")
+                    b.Property<int?>("ExaminationTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Notes")
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProblemDescription")
                         .HasColumnType("longtext");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -117,38 +117,38 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2025, 10, 17, 0, 18, 26, 931, DateTimeKind.Local).AddTicks(7497),
+                            DateTime = new DateTime(2025, 11, 26, 18, 41, 54, 175, DateTimeKind.Local).AddTicks(7712),
                             DoctorId = 2,
                             ExaminationTypeId = 1,
-                            Notes = "Kontrola tlaku",
-                            PatientId = 6
+                            PatientId = 6,
+                            ProblemDescription = "Vysoký tlak"
                         },
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2025, 10, 22, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9735),
+                            DateTime = new DateTime(2025, 12, 1, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(468),
                             DoctorId = 3,
                             ExaminationTypeId = 3,
-                            Notes = "Krevní test",
-                            PatientId = 7
+                            PatientId = 7,
+                            ProblemDescription = "Krevní test"
                         },
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2025, 10, 25, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9749),
+                            DateTime = new DateTime(2025, 12, 4, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(482),
                             DoctorId = 4,
                             ExaminationTypeId = 2,
-                            Notes = "Vyšetření kloubů",
-                            PatientId = 8
+                            PatientId = 8,
+                            ProblemDescription = "Bolest kloubů"
                         },
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2025, 10, 19, 0, 18, 26, 932, DateTimeKind.Local).AddTicks(9752),
+                            DateTime = new DateTime(2025, 11, 28, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(485),
                             DoctorId = 4,
                             ExaminationTypeId = 2,
-                            Notes = "Vyšetření ruky",
-                            PatientId = 7
+                            PatientId = 7,
+                            ProblemDescription = "Bolest zápěstí"
                         });
                 });
 
@@ -160,14 +160,14 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Attachment")
+                    b.Property<string>("AttachmentSrc")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ExaminationId")
+                    b.Property<int?>("ExaminationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Values")
@@ -184,22 +184,23 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "vše v pořádku",
+                            Description = "Vše v pořádku",
                             ExaminationId = 1,
                             Values = "TK: 120/80, Puls: 72"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "lehká anémie",
+                            AttachmentSrc = "\\attachments\\examinationResults\\erecept.png",
+                            Description = "Lehká anémie",
                             ExaminationId = 2,
                             Values = "Hemoglobin: 110 g/l, Hct: 33%"
                         },
                         new
                         {
                             Id = 3,
-                            Attachment = "cloub_knee_xray.jpg",
-                            Description = "artritida kolene",
+                            AttachmentSrc = "\\attachments\\examinationResults\\rentgen.pdf",
+                            Description = "Artritida kolene",
                             ExaminationId = 3,
                             Values = "RTG: mírná artritida, rentgenový snímek v příloze"
                         });
@@ -215,8 +216,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("varchar(70)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -250,8 +251,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("varchar(70)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -285,6 +286,35 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Hrubos.HospitalSystem.Domain.Entities.SystemSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SystemSetting");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "MaxVaccinationPerDay",
+                            Value = "20"
+                        });
+                });
+
             modelBuilder.Entity("Hrubos.HospitalSystem.Domain.Entities.Vaccination", b =>
                 {
                     b.Property<int>("Id")
@@ -296,13 +326,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("NextDose")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VaccineTypeId")
+                    b.Property<int?>("VaccineTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -317,32 +344,28 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 10, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4240),
-                            NextDose = new DateTime(2026, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4387),
+                            DateTime = new DateTime(2024, 12, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(4896),
                             PatientId = 6,
                             VaccineTypeId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2025, 2, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4706),
-                            NextDose = new DateTime(2026, 2, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4708),
+                            DateTime = new DateTime(2025, 4, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5190),
                             PatientId = 7,
                             VaccineTypeId = 2
                         },
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2025, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4710),
-                            NextDose = new DateTime(2026, 4, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4711),
+                            DateTime = new DateTime(2025, 6, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5193),
                             PatientId = 8,
                             VaccineTypeId = 3
                         },
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2025, 7, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4718),
-                            NextDose = new DateTime(2026, 10, 27, 0, 18, 26, 933, DateTimeKind.Local).AddTicks(4719),
+                            DateTime = new DateTime(2025, 9, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5195),
                             PatientId = 6,
                             VaccineTypeId = 2
                         });
@@ -358,8 +381,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("varchar(70)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -409,7 +432,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -454,6 +477,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -471,6 +495,9 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("MaxExaminationPerDay")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -499,6 +526,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -513,24 +541,25 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c72ddef-1aa7-4411-9a02-f8783dd44ca9",
+                            ConcurrencyStamp = "1a174d18-905f-485b-b1a7-8f94437fc615",
                             Email = "admin@admin.cz",
                             EmailConfirmed = true,
                             FirstName = "Admin",
                             LastName = "Martin",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 0,
                             NormalizedEmail = "ADMIN@ADMIN.CZ",
                             NormalizedUserName = "ADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEC4prnSMIdRUykdd65G87+g3lLCc9cqJ/re6T1TsQFv5xlMrmVIe4k7yMQiEYWpH3A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d572d30355394513a9f9c043e9ab8196",
+                            SecurityStamp = "88e7e00c35b7437398cca7c6b8ae0969",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -538,18 +567,19 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "506432e5-4fde-4c73-a54f-6b491c40a372",
+                            ConcurrencyStamp = "93f4a1d3-158e-4fa0-8d08-764e70dce14d",
                             Email = "jan.novak@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Jan",
                             LastName = "Novák",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 10,
                             NormalizedEmail = "JAN.NOVAK@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR1",
                             PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
                             PhoneNumber = "111222333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3dd1981a443d473c81b8b4aa6a9af64f",
+                            SecurityStamp = "733739cee0194ba7a09c2aed3fd9e7b1",
                             SpecializationId = 1,
                             TwoFactorEnabled = false,
                             UserName = "doctor1"
@@ -558,18 +588,19 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "23b53f1a-574f-4e7d-aa91-4fa895389d56",
+                            ConcurrencyStamp = "3d59f31f-94f6-4535-ba9e-8b18147fc137",
                             Email = "petr.svoboda@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Petr",
                             LastName = "Svoboda",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 5,
                             NormalizedEmail = "PETR.SVOBODA@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR2",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK4DkND+5IwQiNI01DelkSwKPGQnzZAxCmobmvF3J0w5Xr6YO4bUtzjJwe2qRzUv7g==",
                             PhoneNumber = "222333444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "279fb73875ae47cd879c99b203c3b207",
+                            SecurityStamp = "9704108d3a1a4efebe344ae78980c2f4",
                             SpecializationId = 2,
                             TwoFactorEnabled = false,
                             UserName = "doctor2"
@@ -578,18 +609,19 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea57e9c6-b536-4949-8821-c33c6aa32c87",
+                            ConcurrencyStamp = "c9885337-8037-4a88-b93c-6d7f997b3a8e",
                             Email = "lucie.dvorakova@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Lucie",
                             LastName = "Dvořáková",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 2,
                             NormalizedEmail = "LUCIE.DVORAKOVA@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR3",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMK02V+4Wdm0lgraNwSBHPhhYUFmVpoCrp103XwzNXTFK6/s8xx0AAdpsd2G2KquQQ==",
                             PhoneNumber = "333444555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ae5bf88681b44301b71cd14a895dc5fe",
+                            SecurityStamp = "520ff02ea7584ad380a0121d9763a47c",
                             SpecializationId = 3,
                             TwoFactorEnabled = false,
                             UserName = "doctor3"
@@ -598,18 +630,19 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3d4642f4-2169-4ada-b4b9-6f6454227581",
+                            ConcurrencyStamp = "652043ed-e151-4263-8711-4141fdc45a13",
                             Email = "arnost.patek@nemocnice.cz",
                             EmailConfirmed = true,
                             FirstName = "Arnošt",
                             LastName = "Pátek",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 0,
                             NormalizedEmail = "ARNOST.PATEK@NEMOCNICE.CZ",
                             NormalizedUserName = "DOCTOR4",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGrcdYyAHwCXTbk9VS3VItkcEq4bhgiPBFetA8rLbp/6Asw87PI2TqWE5csu8u6TDA==",
                             PhoneNumber = "444555666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c8ac754367164f5d88147a0f58fbf945",
+                            SecurityStamp = "3441b987d50249b1a12253ff597e31fd",
                             SpecializationId = 2,
                             TwoFactorEnabled = false,
                             UserName = "doctor4"
@@ -618,19 +651,20 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            BirthNumber = "900101/1234",
-                            ConcurrencyStamp = "a037be5a-9a37-4694-8c16-014b84fd5b18",
+                            BirthNumber = "050510/2224",
+                            ConcurrencyStamp = "ee3774fd-818b-4b94-b275-2bf14ef0f755",
                             Email = "tomas.horak@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Tomáš",
                             LastName = "Horák",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 0,
                             NormalizedEmail = "TOMAS.HORAK@EMAIL.CZ",
-                            NormalizedUserName = "PACIENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            NormalizedUserName = "PATIENT1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBacwHfAQ8oysuC+yEOFP2TakEie2+73wHf89V+TJX+Ioy5NfCTZkS0U/P5kN7yjmg==",
                             PhoneNumber = "601111111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e31f49e78c9842208d02434430c42343",
+                            SecurityStamp = "bdddfcb81de347a7a5cabd831fe48b0f",
                             TwoFactorEnabled = false,
                             UserName = "patient1"
                         },
@@ -638,19 +672,20 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            BirthNumber = "950202/2345",
-                            ConcurrencyStamp = "1d74d165-6a7f-43df-b89c-30f08f3aceb7",
+                            BirthNumber = "855801/0406",
+                            ConcurrencyStamp = "34c88d3f-ba51-4e04-8d46-a9f887a3e119",
                             Email = "anna.mala@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Anna",
                             LastName = "Malá",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 0,
                             NormalizedEmail = "ANNA.MALA@EMAIL.CZ",
-                            NormalizedUserName = "PACIENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            NormalizedUserName = "PATIENT2",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK31Pd3GzmAcXrVtoSezhRdeqGp0l5c6Zl0IjUvn6vAeslrjG7bgOuN4jHqQBRDbZA==",
                             PhoneNumber = "602222222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88390c5c7c9243e18c81feeb86277a26",
+                            SecurityStamp = "7f4eed24be3b493ab523a0dd8fa645d2",
                             TwoFactorEnabled = false,
                             UserName = "patient2"
                         },
@@ -658,19 +693,20 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            BirthNumber = "880303/3456",
-                            ConcurrencyStamp = "7900dbe2-54f4-4c77-a022-52a94694efbc",
+                            BirthNumber = "920808/8032",
+                            ConcurrencyStamp = "bcff5923-7a82-4af7-8d06-2641d1747f2b",
                             Email = "karel.novotny@email.cz",
                             EmailConfirmed = true,
                             FirstName = "Karel",
                             LastName = "Novotný",
                             LockoutEnabled = true,
+                            MaxExaminationPerDay = 0,
                             NormalizedEmail = "KAREL.NOVOTNY@EMAIL.CZ",
-                            NormalizedUserName = "PACIENT3",
-                            PasswordHash = "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==",
+                            NormalizedUserName = "PATIENT3",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGDwHucn5uWF1684moFrwbqoaym+z0IHUiN+/EDQnXgz6HiEbGnaqFT136phybDc4g==",
                             PhoneNumber = "603333333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "76c3da1c81144103b0a0476e8530584e",
+                            SecurityStamp = "53599ee32caa4e93b483e1bb40077e71",
                             TwoFactorEnabled = false,
                             UserName = "patient3"
                         });
@@ -697,7 +733,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -721,7 +757,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
@@ -742,7 +778,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
@@ -757,7 +793,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new
@@ -767,23 +803,8 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            UserId = 1,
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 3
-                        },
-                        new
-                        {
                             UserId = 2,
                             RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            RoleId = 3
                         },
                         new
                         {
@@ -792,28 +813,13 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            UserId = 3,
-                            RoleId = 3
-                        },
-                        new
-                        {
                             UserId = 4,
                             RoleId = 2
                         },
                         new
                         {
-                            UserId = 4,
-                            RoleId = 3
-                        },
-                        new
-                        {
                             UserId = 5,
                             RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 5,
-                            RoleId = 3
                         },
                         new
                         {
@@ -848,7 +854,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Hrubos.HospitalSystem.Domain.Entities.DoctorPatient", b =>
@@ -856,13 +862,13 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.HasOne("Hrubos.HospitalSystem.Infrastructure.Identity.User", "Doctor")
                         .WithMany("DoctorPatients")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Hrubos.HospitalSystem.Infrastructure.Identity.User", "Patient")
                         .WithMany("PatientDoctors")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -875,20 +881,16 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.HasOne("Hrubos.HospitalSystem.Infrastructure.Identity.User", "Doctor")
                         .WithMany("DoctorExaminations")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Hrubos.HospitalSystem.Domain.Entities.ExaminationType", "ExaminationType")
                         .WithMany("Examinations")
-                        .HasForeignKey("ExaminationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExaminationTypeId");
 
                     b.HasOne("Hrubos.HospitalSystem.Infrastructure.Identity.User", "Patient")
                         .WithMany("PatientExaminations")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Doctor");
 
@@ -901,9 +903,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                 {
                     b.HasOne("Hrubos.HospitalSystem.Domain.Entities.Examination", "Examination")
                         .WithOne("Result")
-                        .HasForeignKey("Hrubos.HospitalSystem.Domain.Entities.ExaminationResult", "ExaminationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Hrubos.HospitalSystem.Domain.Entities.ExaminationResult", "ExaminationId");
 
                     b.Navigation("Examination");
                 });
@@ -913,14 +913,11 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.HasOne("Hrubos.HospitalSystem.Infrastructure.Identity.User", "Patient")
                         .WithMany("Vaccinations")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Hrubos.HospitalSystem.Domain.Entities.VaccineType", "VaccineType")
                         .WithMany("Vaccinations")
-                        .HasForeignKey("VaccineTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VaccineTypeId");
 
                     b.Navigation("Patient");
 
@@ -932,7 +929,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     b.HasOne("Hrubos.HospitalSystem.Domain.Entities.Specialization", "Specialization")
                         .WithMany("Doctors")
                         .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Specialization");
                 });

@@ -147,7 +147,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    BirthNumber = "900101/1234"
+                    BirthNumber = "050510/2224"
                 },
                 new User
                 {
@@ -168,7 +168,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    BirthNumber = "950202/2345"
+                    BirthNumber = "855801/0406"
                 },
                 new User
                 {
@@ -189,7 +189,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    BirthNumber = "880303/3456"
+                    BirthNumber = "920808/8032"
                 }
             };
         }

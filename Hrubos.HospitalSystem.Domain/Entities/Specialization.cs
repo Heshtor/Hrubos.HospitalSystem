@@ -9,8 +9,8 @@ namespace Hrubos.HospitalSystem.Domain.Entities
     public class Specialization : Entity<int>
     {
         [Required]
-        [StringLength(70)]
         [FirstLetterCapitalized]
+        [StringLength(50, ErrorMessage = "Pole {0} nesmí obsahovat více než {1} znaků.")]
         public string Name { get; set; }
 
         public IList<IUser<int>>? Doctors { get; set; }

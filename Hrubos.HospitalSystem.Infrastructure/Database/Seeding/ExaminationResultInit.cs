@@ -11,7 +11,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new ExaminationResult
                 {
                     Id = 1,
-                    Description = "vše v pořádku",
+                    Description = "Vše v pořádku",
                     Values = "TK: 120/80, Puls: 72",
                     AttachmentSrc = null,
                     ExaminationId = 1
@@ -19,7 +19,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new ExaminationResult
                 {
                     Id = 2,
-                    Description = "lehká anémie",
+                    Description = "Lehká anémie",
                     Values = "Hemoglobin: 110 g/l, Hct: 33%",
                     AttachmentSrc = "\\attachments\\examinationResults\\erecept.png",
                     ExaminationId = 2
@@ -27,7 +27,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
                 new ExaminationResult
                 {
                     Id = 3,
-                    Description = "artritida kolene",
+                    Description = "Artritida kolene",
                     Values = "RTG: mírná artritida, rentgenový snímek v příloze",
                     AttachmentSrc = "\\attachments\\examinationResults\\rentgen.pdf",
                     ExaminationId = 3
