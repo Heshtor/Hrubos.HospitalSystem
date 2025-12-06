@@ -1,6 +1,6 @@
-﻿@model ExaminationType
+﻿@model VaccineType
 @{
-    ViewData["Title"] = "Vytvořit typ vyšetření";
+    ViewData["Title"] = "Upravit typ vakcíny";
 }
 
 @section Styles
@@ -14,16 +14,16 @@
     </div>
 
     <div class="card">
-        <form asp-action="Create" method="post">
+        <form asp-action="Edit" method="post">
             <div class="form-group">
                 <label asp-for="Name">Název</label>
-                <input asp-for="Name" placeholder="Obvodní vyšetření" />
+                <input asp-for="Name" placeholder="@Model.Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+            </div>           
 
             <div class="buttons">
                 <button type="submit">
-                    <i class='bx bx-save'></i> Vytvořit
+                    <i class='bx bx-save'></i> Uložit změny
                 </button>
                 <a asp-action="Select" class="button">
                     <i class='bx bx-x-circle'></i> Zrušit
