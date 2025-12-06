@@ -59,6 +59,22 @@ namespace Hrubos.HospitalSystem.Web.Areas.Account.Controllers
                 else
                 {
                     _logger.LogError("Chyba při registraci uživatele: {errors}", string.Join(", ", errors));
+
+                    foreach (var error in errors)
+                    {
+                        if (error.Contains("Username")) // pokud chyba obsahuje "Username"
+                        {
+                            ModelState.AddModelError(nameof(RegisterViewModel.UserName), "Uživatelské jméno je již registrováno.");
+                        }
+                        else if (error.Contains("Email")) // pokud chyba obsahuje "Email"
+                        {
+                            ModelState.AddModelError(nameof(RegisterViewModel.Email), "Email je již registrován.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, error);
+                        }
+                    }
                 }
             }
 
