@@ -1,6 +1,7 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Application.ViewModels;
 using Hrubos.HospitalSystem.Domain.Entities;
+using Hrubos.HospitalSystem.Domain.Entities.Interfaces;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
 using Hrubos.HospitalSystem.Infrastructure.Identity.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -133,6 +134,9 @@ namespace Hrubos.HospitalSystem.Web.Areas.Account.Controllers
                 return NotFound();
             }
 
+            var roles = await _securityIdentityService.GetRolesAsync(currentUser.Id.ToString());
+            currentUser.RoleName = roles.FirstOrDefault() ?? "bez role";
+
             _logger.LogInformation("Uživatel zobrazil svoje osobní údaje.");
 
             return View(currentUser);
@@ -168,6 +172,11 @@ namespace Hrubos.HospitalSystem.Web.Areas.Account.Controllers
                 return NotFound();
             }
 
+            newUserData.Id = currentUser.Id;
+
+            var roles = await _securityIdentityService.GetRolesAsync(currentUser.Id.ToString());
+            newUserData.RoleName = roles.FirstOrDefault(); // aby si uživatel nemohl změnit svou roli
+
             ModelState.Remove(nameof(newUserData.UserName)); // neměním uživatelské jméno, proto nekontroluji jeho validitu
 
             if (!ModelState.IsValid)
@@ -182,19 +191,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Account.Controllers
                 return View(newUserData);
             }
 
-            currentUser.FirstName = newUserData.FirstName;
-            currentUser.LastName = newUserData.LastName;
-            currentUser.Email = newUserData.Email;
-            currentUser.PhoneNumber = newUserData.PhoneNumber;
-            currentUser.BirthNumber = newUserData.BirthNumber;
-
-            if (User.IsInRole(nameof(Roles.Doctor)))
-            {
-                currentUser.SpecializationId = newUserData.SpecializationId;
-                currentUser.MaxExaminationPerDay = newUserData.MaxExaminationPerDay;
-            }
-
-            bool updated = await _securityIdentityService.EditUserAsync(currentUser);
+            bool updated = await _securityIdentityService.EditUserAsync(newUserData);
 
             if (updated)
             {

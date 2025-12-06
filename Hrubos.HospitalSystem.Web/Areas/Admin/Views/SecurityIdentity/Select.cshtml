@@ -1,0 +1,132 @@
+﻿@model IList<User>
+@{
+    ViewData["Title"] = "Uživatelé";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">UserName</th>
+                            <th scope="col">Jméno</th>
+                            <th scope="col">Příjmení</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefonní číslo</th>
+                            <th scope="col">Rodné číslo</th>
+                            <th scope="col">Specializace</th>
+                            <th scope="col">Maximum vyšetření za den</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.RoleName</td>
+                                <td>@item.UserName</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.FirstName))
+                                    {
+                                        <span>@item.FirstName</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.LastName))
+                                    {
+                                        <span>@item.LastName</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>@item.Email</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.PhoneNumber))
+                                    {
+                                        <span>@item.PhoneNumber</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.BirthNumber))
+                                    {
+                                        <span>@item.BirthNumber</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Specialization != null)
+                                    {
+                                        <span class="exam-link">[@item.Specialization.Id] @item.Specialization.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>nemá</span>
+                                    }
+                                <td>
+                                    @if (item.RoleName == nameof(Roles.Doctor))
+                                    {
+                                        <span>@item.MaxExaminationPerDay</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="buttons">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="button edit" title="upravit">
+                                            <i class='bx bx-pencil'></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="smazat">
+                                            <i class='bx bx-trash'></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Zatím zde nejsou žádní uživatelé.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}

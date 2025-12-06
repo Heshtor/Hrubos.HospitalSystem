@@ -36,6 +36,9 @@ namespace Hrubos.HospitalSystem.Infrastructure.Identity
         public virtual int? SpecializationId { get; set; }
         public virtual Specialization? Specialization { get; set; }
 
+        [NotMapped]
+        public string? RoleName { get; set; }
+
         public IList<Examination>? PatientExaminations { get; set; }
         public IList<Examination>? DoctorExaminations { get; set; }
 

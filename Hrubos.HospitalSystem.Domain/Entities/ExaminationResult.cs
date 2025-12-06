@@ -9,7 +9,7 @@ namespace Hrubos.HospitalSystem.Domain.Entities
     public class ExaminationResult : Entity<int>
     {
         [Required]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public string? Values { get; set; }
 
