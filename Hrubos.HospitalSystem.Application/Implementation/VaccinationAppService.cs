@@ -67,6 +67,18 @@ namespace Hrubos.HospitalSystem.Application.Implementation
                 return false;
             }
 
+            // Denní limit očkování
+            int maxDailyLimit = _systemSettingsAppService.GetIntValue("MaxVaccinationsPerDay", 20);
+
+            // Počet registrovaných očkování pro daný den
+            int currentCount = _hospitalSystemDbContext.Vaccinations.Count(v => v.DateTime.Date == newVaccination.DateTime.Date && v.Id != id);
+
+            // Kontrola kapacity
+            if (currentCount + 1 > maxDailyLimit)
+            {
+                throw new InvalidOperationException($"Kapacita očkování pro datum {newVaccination.DateTime.ToShortDateString()} je již naplněna (Limit: {maxDailyLimit}).");
+            }
+
             _hospitalSystemDbContext.Entry(vaccination).CurrentValues.SetValues(newVaccination);
             _hospitalSystemDbContext.SaveChanges();
 

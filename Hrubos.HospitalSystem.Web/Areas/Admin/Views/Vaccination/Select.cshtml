@@ -1,0 +1,89 @@
+﻿@model IList<Vaccination>
+@{
+    ViewData["Title"] = "Vakcinace";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        
+        <a asp-action="Create" class="button">
+            <i class='bx bx-plus'></i> Nová vakcinace
+        </a>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Datum a čas</th>
+                            <th scope="col">Typ vakcinace</th>
+                            <th scope="col">Pacient</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (item.VaccineType != null)
+                                    {
+                                        <span class="exam-link">[@item.VaccineType.Id] @item.VaccineType.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Patient != null)
+                                    {
+                                        <span class="exam-link">[@item.Patient.Id] @item.Patient.UserName</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="buttons">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="button edit" title="upravit">
+                                            <i class='bx bx-pencil'></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="smazat">
+                                            <i class='bx bx-trash'></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Zatím zde nejsou žádné vakcinace.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
