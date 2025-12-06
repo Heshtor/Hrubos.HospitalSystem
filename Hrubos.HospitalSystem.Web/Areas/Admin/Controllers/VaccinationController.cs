@@ -1,5 +1,4 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
-using Hrubos.HospitalSystem.Application.Implementation;
 using Hrubos.HospitalSystem.Domain.Entities;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
 using Hrubos.HospitalSystem.Infrastructure.Identity.Enums;
@@ -39,7 +38,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
             SetVaccineTypeSelectList();
             await SetPatientSelectList();
 
-            return View();
+            return View(new Vaccination());
         }
 
         [HttpPost]
@@ -63,9 +62,12 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
             }
             catch (InvalidOperationException ex) // již naplněná kapacita
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ModelState.AddModelError(nameof(Vaccination.DateTime), ex.Message);
 
                 _logger.LogWarning(ex, "Pokus o vytvoření vakcinace nad denní limit.");
+
+                SetVaccineTypeSelectList(vaccination.VaccineTypeId);
+                await SetPatientSelectList(vaccination.PatientId);
 
                 return View(vaccination);
             }
@@ -138,9 +140,12 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
             }
             catch (InvalidOperationException ex) // již naplněná kapacita
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ModelState.AddModelError(nameof(Vaccination.DateTime), ex.Message);
 
                 _logger.LogWarning(ex, "Pokus o editaci vakcinace nad denní limit.");
+
+                SetVaccineTypeSelectList(vaccination.VaccineTypeId);
+                await SetPatientSelectList(vaccination.PatientId);
 
                 return View(vaccination);
             }

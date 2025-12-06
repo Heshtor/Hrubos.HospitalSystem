@@ -1,7 +1,6 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Application.ViewModels;
 using Hrubos.HospitalSystem.Domain.Entities;
-using Hrubos.HospitalSystem.Domain.Entities.Interfaces;
 using Hrubos.HospitalSystem.Infrastructure.Identity;
 using Hrubos.HospitalSystem.Infrastructure.Identity.Enums;
 using Microsoft.AspNetCore.Authorization;

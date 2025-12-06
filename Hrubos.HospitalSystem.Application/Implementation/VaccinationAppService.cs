@@ -26,17 +26,7 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public void Create(Vaccination vaccination)
         {
-            // Denní limit očkování
-            int maxDailyLimit = _systemSettingsAppService.GetIntValue("MaxVaccinationsPerDay", 20);
-
-            // Počet registrovaných očkování pro daný den
-            int currentCount = _hospitalSystemDbContext.Vaccinations.Count(v => v.DateTime.Date == vaccination.DateTime.Date);
-
-            // Kontrola kapacity
-            if (currentCount >= maxDailyLimit)
-            {
-                throw new InvalidOperationException($"Kapacita očkování pro datum {vaccination.DateTime.ToShortDateString()} je již naplněna (Limit: {maxDailyLimit}).");
-            }
+            MaxCapacityReached(vaccination.DateTime);
 
             _hospitalSystemDbContext.Vaccinations.Add(vaccination);
             _hospitalSystemDbContext.SaveChanges();
@@ -67,16 +57,11 @@ namespace Hrubos.HospitalSystem.Application.Implementation
                 return false;
             }
 
-            // Denní limit očkování
-            int maxDailyLimit = _systemSettingsAppService.GetIntValue("MaxVaccinationsPerDay", 20);
+            bool isSameDay = vaccination.DateTime.Date == newVaccination.DateTime.Date;
 
-            // Počet registrovaných očkování pro daný den
-            int currentCount = _hospitalSystemDbContext.Vaccinations.Count(v => v.DateTime.Date == newVaccination.DateTime.Date && v.Id != id);
-
-            // Kontrola kapacity
-            if (currentCount + 1 > maxDailyLimit)
+            if (!isSameDay)
             {
-                throw new InvalidOperationException($"Kapacita očkování pro datum {newVaccination.DateTime.ToShortDateString()} je již naplněna (Limit: {maxDailyLimit}).");
+                MaxCapacityReached(newVaccination.DateTime);
             }
 
             _hospitalSystemDbContext.Entry(vaccination).CurrentValues.SetValues(newVaccination);
@@ -88,6 +73,23 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         public Vaccination GetById(int id)
         {
             return _hospitalSystemDbContext.Vaccinations.FirstOrDefault(e => e.Id == id);
+        }
+
+        private void MaxCapacityReached(DateTime date)
+        {
+            // Denní limit očkování
+            int maxDailyLimit = _systemSettingsAppService.GetIntValue("MaxVaccinationsPerDay", 20);
+
+            DateTime dayStart = date.Date;
+            DateTime dayEnd = dayStart.AddDays(1);
+
+            // Počet registrovaných očkování pro daný den
+            int currentCount = _hospitalSystemDbContext.Vaccinations.Count(v => v.DateTime >= dayStart && v.DateTime < dayEnd);
+
+            if (currentCount >= maxDailyLimit)
+            {
+                throw new InvalidOperationException($"Kapacita očkování pro datum {date.ToShortDateString()} je již naplněna (Limit: {maxDailyLimit}).");
+            }
         }
     }
 }

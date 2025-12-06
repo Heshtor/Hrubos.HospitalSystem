@@ -10,7 +10,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Database.Seeding
             {
                 new SystemSetting {
                     Id = 1,
-                    Key = "MaxVaccinationPerDay",
+                    Key = "MaxVaccinationsPerDay",
                     Value = "20"
                 }
             };
