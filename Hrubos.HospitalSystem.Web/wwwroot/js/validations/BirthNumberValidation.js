@@ -1,25 +1,49 @@
-﻿$.validator.addMethod('birthnumber', function (value, element) {
+﻿$.validator.addMethod('birthnumber', function (value, element, params) {
     if (!value || value == '') { // pokud je pole prázdné
         return true;
     }
 
+    var message = null;
+    var isValid = true;
+
     // Kontrola formátu rodného čísla
     // Formát: 6 číslic + lomítko + 3 nebo 4 číslice
-    if (!"/^\d{6}\/\d{3,4}$/".test(value)) {
-        return false;
+    var format = /^\d{6}\/\d{3,4}$/;
+    if (!format.test(value)) {
+        isValid = false;
+        message = params.msgformat;
+    } else {
+        var rc = value.replace('/', '').trim(); // odebrání lomítka
+
+        // Kontrola dělitelnosti 11 (pouze pro 10místná čísla)
+        if (rc.length === 10) {
+            var number = parseInt(rc, 10);
+
+            if (number % 11 !== 0) {
+                isValid = false;
+                message = params.msgmodulo;
+            }
+        }
     }
 
-    var rc = value.replace('/', '').trim(); // odebrání lomítka
+    if (!isValid) {
+        var validator = $.data(element.form, "validator");
 
-    // Kontrola dělitelnosti 11 (pouze pro 10místná čísla)
-    if (rc.length === 10) {
-        var number = parseInt(rc, 10);
-        if (number % 11 !== 0) {
-            return false;
+        if (validator && validator.settings.messages[element.name]) {
+            validator.settings.messages[element.name].birthnumber = message;
         }
+
+        return false;
     }
 
     return true;
 });
 
-$.validator.unobtrusive.adapters.addBool('birthnumber');
+$.validator.unobtrusive.adapters.add('birthnumber', ['msgformat', 'msgmodulo'], function (options) {
+    options.rules['birthnumber'] = {
+        msgformat: options.params.msgformat,
+        msgmodulo: options.params.msgmodulo,
+    };
+
+    options.messages['birthnumber'] = options.message;
+});

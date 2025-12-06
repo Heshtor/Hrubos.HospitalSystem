@@ -26,7 +26,7 @@ namespace Hrubos.HospitalSystem.Domain.Validations
                 // Formát: 6 číslic + lomítko + 3 nebo 4 číslice
                 if (!Regex.IsMatch(input, @"^\d{6}/\d{3,4}$"))
                 {
-                    return new ValidationResult($"Pole {validationContext.MemberName} musí být ve formátu XXXXXX/XXXX.");
+                    return new ValidationResult($"Pole {validationContext.MemberName} musí být ve formátu XXXXXX/XXXX nebo XXXXXX/XXX.");
                 }
 
                 string cleanNumber = input.Replace("/", ""); // odebrání lomítka
@@ -56,7 +56,10 @@ namespace Hrubos.HospitalSystem.Domain.Validations
             if (context.Attributes.ContainsKey("data-val") == false)
                 context.Attributes.Add("data-val", "true");
 
-            context.Attributes.Add("data-val-birthnumber", $"Pole {context.ModelMetadata.Name} obsahuje neplatné rodné číslo.");
+            context.Attributes.Add("data-val-birthnumber", "Neplatné rodné číslo."); // fallback zpráva
+
+            context.Attributes.Add("data-val-birthnumber-msgformat", $"Pole {context.ModelMetadata.Name} musí být ve formátu XXXXXX/XXXX nebo XXXXXX/XXX");
+            context.Attributes.Add("data-val-birthnumber-msgmodulo", $"Pole {context.ModelMetadata.Name} musí obsahovat platné rodné číslo.");
         }
     }
 }
