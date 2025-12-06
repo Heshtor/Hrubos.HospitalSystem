@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doctor))]
+    [Authorize(Roles = nameof(Roles.Admin))]
     public class SpecializationController : Controller
     {
         private readonly ISpecializationAppService _specializationAppService;

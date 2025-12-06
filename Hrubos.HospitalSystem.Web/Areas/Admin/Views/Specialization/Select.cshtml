@@ -1,31 +1,67 @@
 ﻿@model IList<Specialization>
-
 @{
     ViewData["Title"] = "Specializace";
 }
-<h1>@ViewData["Title"]</h1>
 
-@if (Model != null && Model.Count > 0)
+@section Styles
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Název</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <th scope="row">@Model[i].Id</th>
-                    <td>@Model[i].Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
 }
-else
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        
+        <a asp-action="Create" class="button">
+            <i class='bx bx-plus'></i> Nová specializace
+        </a>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Název</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>                            
+                                <td>
+                                    <div class="buttons">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="button edit" title="upravit">
+                                            <i class='bx bx-pencil'></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="smazat">
+                                            <i class='bx bx-trash'></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Zatím zde nejsou žádné specializace.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
 {
-    <p>Tabulka specializací je prázdná!</p>
+    <script src="~/js/dialogs.js"></script>
 }
