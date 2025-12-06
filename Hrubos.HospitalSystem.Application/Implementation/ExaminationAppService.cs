@@ -26,6 +26,8 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public void Create(Examination examination)
         {
+            MaxCapacityReached(examination.DoctorId, examination.DateTime, null);
+
             _hospitalSystemDbContext.Examinations.Add(examination);
             _hospitalSystemDbContext.SaveChanges();
         }
@@ -55,6 +57,14 @@ namespace Hrubos.HospitalSystem.Application.Implementation
                 return false;
             }
 
+            bool isSameDoctor = examination.DoctorId == newExamination.DoctorId;
+            bool isSameDay = examination.DateTime.Date == newExamination.DateTime.Date;
+
+            if (!isSameDoctor || !isSameDay) // pokud se mění doktor nebo den
+            {
+                MaxCapacityReached(newExamination.DoctorId, newExamination.DateTime, id);
+            }
+
             _hospitalSystemDbContext.Entry(examination).CurrentValues.SetValues(newExamination);
             _hospitalSystemDbContext.SaveChanges();
 
@@ -64,6 +74,38 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         public Examination GetById(int id)
         {
             return _hospitalSystemDbContext.Examinations.FirstOrDefault(e => e.Id == id);
+        }
+
+        private void MaxCapacityReached(int? doctorId, DateTime date, int? excludeExaminationId)
+        {
+            // Pokud vyšetření nemá přiřazeného doktora, limit nekontrolujeme
+            if (doctorId == null) return;
+
+            var doctor = _hospitalSystemDbContext.Users.FirstOrDefault(u => u.Id == doctorId);
+
+            if (doctor == null) return;
+
+            // Maximální počet vyšetření za den pro daného doktora
+            int maxLimit = doctor.MaxExaminationPerDay ?? 0;
+
+            DateTime dayStart = date.Date;
+            DateTime dayEnd = dayStart.AddDays(1);
+
+            // Počet registrovaných vyšetření pro daný den u doktora
+            var query = _hospitalSystemDbContext.Examinations.Where(e => e.DoctorId == doctorId && e.DateTime >= dayStart && e.DateTime < dayEnd);
+
+            // Pokud je prováděna editace, musím odečíst sám sebe z počtu
+            if (excludeExaminationId.HasValue)
+            {
+                query = query.Where(e => e.Id != excludeExaminationId.Value);
+            }
+
+            int currentCount = query.Count();
+
+            if (currentCount >= maxLimit)
+            {
+                throw new InvalidOperationException($"Kapacita vyšetření pro doktora {doctor.UserName} na den {date.ToShortDateString()} je již naplněna (Limit: {maxLimit}).");
+            }
         }
     }
 }

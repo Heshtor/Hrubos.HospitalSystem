@@ -10,6 +10,7 @@ namespace Hrubos.HospitalSystem.Domain.Entities
         [Required]
         public DateTime DateTime { get; set; }
 
+        [Required]
         public string? ProblemDescription { get; set; }
 
         [ForeignKey(nameof(ExaminationType))]
