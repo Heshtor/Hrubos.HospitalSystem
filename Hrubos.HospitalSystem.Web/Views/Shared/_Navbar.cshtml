@@ -8,12 +8,6 @@
 
     <nav class="navigation">
         <ul class="navList">
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Privacy">
-                    <span class="linksName">Privacy</span>
-                </a>
-            </li>
-
             @if (User.Identity.IsAuthenticated && (User.IsInRole("Patient")))
             {
                 <li>
@@ -41,34 +35,41 @@
                 </li>
             }
 
-            <div class="buttons">
-                @if (!User.Identity.IsAuthenticated)
-                {
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="buttons">
                     <li>
-                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Register" title="zaregistrovat se">
-                            <i class='bx bx-plus-circle'></i>
+                        <a class="account-btn" asp-area="Account" asp-controller="Home" asp-action="Index" title="účet">
+                            <span class="linksName">@User.Identity.Name</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Login" title="přihlásit se">
-                            <i class='bx bx-log-in'></i>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li>
-                        <span class="linksName">Přihlášen jako @User.Identity.Name</span>
-                    </li>
+                    <div class="oddelovac-vertical"></div>
 
-                    <li>                 
-                        <a class="btn" asp-area="Security" asp-controller="Account" asp-action="Logout" title="odhlásit se">
+                    <li>
+                        <a class="btn" asp-area="Account" asp-controller="Home" asp-action="Logout" title="odhlásit se">
                             <i class='bx bx-log-out'></i>
                         </a>
                     </li>
-                }
-            </div>
+                </div>
+            } else
+            {
+                <div class="buttons">
+                    <li>
+                        <a class="account-btn" title="účet">
+                            <span class="linksName">nepřihlášen</span>
+                        </a>
+                    </li>
+
+                    <div class="oddelovac-vertical"></div>
+
+                    <li>
+                        <a class="btn" asp-area="Account" asp-controller="Home" asp-action="Login" title="přihlásit se">
+                            <i class='bx bx-log-in'></i>
+                        </a>
+                    </li>
+                </div>
+            }
         </ul>
     </nav>
 </header>

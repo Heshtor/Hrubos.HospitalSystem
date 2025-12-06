@@ -2,10 +2,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   background: #141414;
   z-index: 99;
-  transition: all 0.5s ease;
   overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
@@ -78,9 +77,6 @@
           align-items: center;
           gap: 6px;
           font-size: 20px;
-          background-color: #1E1E1E;
-          border: 1px dashed #CACACA;
-          border-radius: 10px;
           padding: 10px;
           cursor: pointer;
           user-select: none;
@@ -100,19 +96,28 @@
           color: white; }
         .header > .navigation > ul.navList li > a:hover:after, .header > .navigation > ul.navList li > a.active:after {
           width: calc(100% - 6px); }
-      .header > .navigation > ul.navList .buttons {
+      .header > .navigation > ul.navList > .buttons {
         display: flex;
-        gap: 6px; }
-        .header > .navigation > ul.navList .buttons .linksName {
-          position: relative;
+        height: 100%;
+        gap: 0px;
+        flex-wrap: nowrap;
+        background-color: #1E1E1E;
+        border: 3px dashed #54595F; }
+        .header > .navigation > ul.navList > .buttons > .oddelovac-vertical {
+          border-left: 3px dashed #54595F;
+          height: 100%; }
+        .header > .navigation > ul.navList > .buttons .account-btn {
           display: flex;
-          padding: 8px 10px;
-          width: fit-content;
+          justify-content: center;
+          align-items: center;
           font-size: 20px;
-          font-weight: 400;
-          white-space: nowrap;
-          pointer-events: auto;
-          transition: all 0.5s ease; }
+          cursor: pointer;
+          user-select: none;
+          padding: 0px 10px; }
+          .header > .navigation > ul.navList > .buttons .account-btn:hover {
+            color: white; }
+            .header > .navigation > ul.navList > .buttons .account-btn:hover:after {
+              width: 0px !important; }
 
 @media screen and (max-width: 768px) {
   .header {
