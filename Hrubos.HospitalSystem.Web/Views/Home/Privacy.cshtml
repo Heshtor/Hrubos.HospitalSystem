@@ -1,6 +1,79 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Zásady ochrany (ne)soukromí";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/privacy.min.css" asp-append-version="true" />
+}
+
+<section class="intro-text">
+    <h2>Vaše soukromí bereme smrtelně vážně 💀</h2>
+    <p>Protože co oči nevidí, to srdce nebolí. A v kardiologii to platí dvojnásob.</p>
+</section>
+
+<hr class="oddelovac">
+
+<section>
+    <div class="grid">
+        <div class="card">  
+            <div class="icon-wrapper">
+                <i class='bx bx-cookie'></i>
+            </div>
+
+            <h3>Cookies a Digitální dieta</h3>
+
+            <p>Tento web používá cookies. <b>Pozor, nejsou jedlé!</b> Nesnažte se je kousat, hrozí poškození monitoru a chrupu.</p>
+            <p>Ukládáme jen to, co je nezbytné, abyste se nemuseli přihlašovat každých 5 sekund.</p>
+            <p>Chráníme tak vaše karpální tunely před zánětem. Děláme to vlastně pro vaše zdraví.</p>
+        </div>
+
+        <div class="card">         
+            <div class="icon-wrapper">
+                <i class='bx bx-id-card'></i>
+            </div>
+
+            <h3>Sběr osobních údajů</h3>
+
+            <p>Pokud se zaregistrujete, uložíme vaše jméno a heslo.</p>
+            <p>Kreditní kartu nám klidně svěřte, ale náš systém je tak děravý, že by si s ní stejně nikdo nic nekoupil.</p>
+            <p>Vaše heslo je <b>zahashované</b> (náš kuchař z něj udělal bramborovou kaši).</p>
+        </div>
+
+        <div class="card">            
+            <div class="icon-wrapper">
+                <i class='bx bx-plus-medical'></i>
+            </div>
+
+            <h3>Vaše diagnózy</h3>
+
+            <p>Vaše zdravotní záznamy v této databázi jsou fiktivní.</p>
+            <p>Pokud zde zjistíte, že trpíte nemocí, kterou nemáte, nebo vám chybí noha, kterou pod stolem cítíte, nepanikařte.</p>
+            <p>Doporučujeme navštívit <b>očního lékaře</b> nebo <b>psychiatra</b>, nikoliv IT oddělení.</p>
+        </div>
+
+        <div class="card">         
+            <div class="icon-wrapper">
+                <i class='bx bx-money-withdraw'></i>
+            </div>
+
+            <h3>Prodej dat 3. stranám</h3>
+
+            <p>Vaše data neprodáváme. Upřímně, na Dark Webu o ně nebyl zájem.</p>
+            <p>Prý máte nudný život a vaše data mají hodnotu použitých obvazů.</p>
+            <p>Jedinou "třetí stranou", která data uvidí, je vyučující při obhajobě.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="danger-card">
+        <i class='bx bxs-skull danger-icon'></i>
+        <h2>VAROVÁNÍ O ZABEZPEČENÍ</h2>
+
+        <p>Tento systém je střežen tučňákem Pingu s licencí zabíjet.</p>
+        <p>Jakýkoliv pokus o neautorizovaný průnik (SQL Injection, XSS nebo ošklivý pohled na monitor) bude potrestán okamžitou lobotomií bez anestezie.</p>
+        <br>
+        <p><i>"Kdo jinému jámu kopá, ten potřebuje ortopeda."</i></p>
+    </div>
+</section>

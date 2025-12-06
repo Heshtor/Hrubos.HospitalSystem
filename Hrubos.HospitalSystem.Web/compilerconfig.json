@@ -20,6 +20,18 @@
     "inputFile": "wwwroot/css/home.scss"
   },
   {
+    "outputFile": "wwwroot/css/error.css",
+    "inputFile": "wwwroot/css/error.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/notfound.css",
+    "inputFile": "wwwroot/css/notfound.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/accessdenied.css",
+    "inputFile": "wwwroot/css/accessdenied.scss"
+  },
+  {
     "outputFile": "wwwroot/css/account.css",
     "inputFile": "wwwroot/css/account.scss"
   },

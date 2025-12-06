@@ -92,6 +92,48 @@ body {
       display: flex;
       flex-direction: column;
       padding: 50px 30px; }
+      body > main > section.section-container {
+        margin: 0 auto; }
+        body > main > section.section-container > .section-header {
+          text-align: center;
+          margin-bottom: 30px; }
+          body > main > section.section-container > .section-header > p {
+            font-style: italic;
+            opacity: 0.8; }
+        body > main > section.section-container > .card {
+          background-color: #1E1E1E;
+          border: 4px solid #CACACA;
+          border-radius: 20px;
+          padding: 40px;
+          text-align: center;
+          box-shadow: 10px 10px 0px #CACACA;
+          display: flex;
+          flex-direction: column;
+          align-items: center; }
+          body > main > section.section-container > .card > .icon {
+            display: flex;
+            font-size: 64px;
+            margin-bottom: 12px;
+            width: max-content; }
+          body > main > section.section-container > .card > p {
+            font-style: italic;
+            opacity: 0.8; }
+          body > main > section.section-container > .card > .technical-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 2px dashed red;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: rgba(255, 140, 0, 0.1); }
+            body > main > section.section-container > .card > .technical-info > .info-label {
+              font-weight: bold; }
+            body > main > section.section-container > .card > .technical-info > .hint {
+              font-weight: bold;
+              font-size: 16px;
+              font-style: italic;
+              opacity: 0.8; }
 
 a, a:visited {
   color: #B6B61E;

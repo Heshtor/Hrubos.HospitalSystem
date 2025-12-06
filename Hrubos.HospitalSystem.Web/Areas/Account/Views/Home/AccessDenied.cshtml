@@ -2,8 +2,33 @@
     ViewData["Title"] = "Přístup zamítnut";
 }
 
-<section>
-    <h2>Sem nemůžeš!</h2>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/accessdenied.min.css" asp-append-version="true" />
+}
 
-    <p>Alou ven 👉🚪</p>
+<section class="section-container">
+    <div class="card">
+        <div class="icon">
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <h2>STOP! Sterilní zóna</h2>
+
+        <p>Omlouváme se, ale vaše identifikační karta na tyto dveře nefunguje.</p>
+        <p>Tato oblast je vyhrazena pouze pro personál s vyšší šarží.</p>
+
+        <br />
+
+        <div class="technical-info">
+            <p class="info-label">DŮVOD ZAMÍTNUTÍ:</p>
+            <p class="hint">Nedostatečná atestace (chybí vám potřebná role).</p>
+        </div>
+
+        <div class="buttons">
+            <a class="button" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class='bx bx-run'></i> Utéct zpátky do čekárny
+            </a>
+        </div>
+    </div>
 </section>

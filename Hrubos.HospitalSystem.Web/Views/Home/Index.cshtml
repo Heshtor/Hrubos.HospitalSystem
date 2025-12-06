@@ -2,8 +2,80 @@
     ViewData["Title"] = "Domů";
 }
 
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/home.min.css" asp-append-version="true" />
+}
+
+<section class="hero-section">
+    <img src="~/images/Pingu.jpg" alt="Logo" class="hero-logo" />
+
+    <h2>Nemocniční systém</h2>
+    <p class="subtitle">Systém, který (většinou) nepadá.</p>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="buttons">
+            <a class="button" asp-area="Account" asp-controller="Home" asp-action="Login">
+                <i class='bx bx-log-in'></i> Vstoupit do systému
+            </a>
+            <a class="button" asp-area="Account" asp-controller="Home" asp-action="Register">
+                <i class='bx bx-user-plus'></i> Zaregistrovat se
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="welcome-back">
+            <h3>Vítejte zpět, @User.Identity.Name!</h3>
+        </div>
+    }
+</section>
+
+<hr class="oddelovac">
+
 <section>
-    <h2>Ahoj</h2>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a asp-area="" asp-action="Privacy">Privacy</a>
+    <h2 class="section-title">Co náš systém umí?</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-pulse'></i>
+            </div>
+
+            <h3>Správa vyšetření</h3>
+
+            <p>Evidence výsledků, která se neztratí v kartotéce. Pokud tedy server neshoří.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-injection'></i>
+            </div>
+
+            <h3>Vakcinační centrum</h3>
+
+            <p>Včeličky pro všechny. Sledujeme, kdo byl očkován a kdo se jen bojí jehly.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-user-pin'></i>
+            </div>
+
+            <h3>Evidence pacientů</h3>
+
+            <p>Databáze všech, kteří prošli našimi dveřmi. A (doufejme) i odešli.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-first-aid'></i>
+            </div>
+
+            <h3>Specializace</h3>
+
+            <p>Od chirurgie po psychiatrii. Máme odborníka na všechno (když má zrovna čas).</p>
+        </div>
+    </div>
 </section>

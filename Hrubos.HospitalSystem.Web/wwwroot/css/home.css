@@ -1,0 +1,24 @@
+﻿.hero-section {
+  text-align: center;
+  align-items: center;
+  gap: 20px; }
+  .hero-section > h2 {
+    margin-bottom: 0px; }
+  .hero-section .hero-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 6px solid #CACACA;
+    object-fit: cover;
+    transition: transform 0.5s ease; }
+    .hero-section .hero-logo:hover {
+      transform: rotate(20deg); }
+  .hero-section > p {
+    font-style: italic;
+    opacity: 0.8; }
+
+.welcome-back {
+  border: 4px dashed #CACACA;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #1E1E1E; }

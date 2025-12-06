@@ -2,12 +2,32 @@
     ViewData["Title"] = "Stránka nenalezena";
 }
 
-<section>
-    <h2>Stránka nenalezena</h2>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/notfound.min.css" asp-append-version="true" />
+}
 
-    <p>Zabloudil jsi? Tato stránka neexistuje.</p>
-    <br />
-    <div class="button-center">
-        <a class="button" asp-area="" asp-controller="Home" asp-action="Index">Zpátky domů</a>
+<section class="section-container">
+    <div class="card">
+        <div class="icon">
+            <i class='bx bx-ghost'></i>
+        </div>
+
+        <h2>404: Pacient nenalezen</h2>
+
+        <p>Je nám líto, ale stránka, kterou hledáte, byla pravděpodobně amputována, převezena na jiné oddělení, nebo nikdy neexistovala.</p>
+
+        <br />
+
+        <div class="technical-info">
+            <p class="info-label">DIAGNÓZA:</p>
+            <p class="hint">URL adresa trpí ztrátou orientace.</p>
+        </div>
+
+        <div class="buttons">
+            <a class="button" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class='bx bx-first-aid'></i> Vrátit se na recepci
+            </a>
+        </div>
     </div>
 </section>

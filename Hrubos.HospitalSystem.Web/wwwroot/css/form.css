@@ -38,14 +38,3 @@
         color: red; }
   .form-card .buttons {
     margin-top: 20px; }
-  .form-card .login-failed {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: red; }
-    .form-card .login-failed > i {
-      color: red; }

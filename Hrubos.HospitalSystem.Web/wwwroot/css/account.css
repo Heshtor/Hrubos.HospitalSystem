@@ -1,39 +1,22 @@
-﻿.account-container {
-  margin: 0 auto; }
-
-.section-header {
-  text-align: center;
-  margin-bottom: 30px; }
-  .section-header p {
-    font-style: italic;
-    opacity: 0.8; }
-
-.profile-card {
-  background-color: #1E1E1E;
-  border: 4px solid #CACACA;
-  border-radius: 20px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
+﻿.card {
   gap: 20px;
-  position: relative;
-  box-shadow: 8px 8px 0px #CACACA; }
-  .profile-card > .profile-icon {
-    display: flex;
+  align-items: stretch; }
+  .card > .icon {
     align-items: center;
     justify-content: center;
-    font-size: 54px; }
-  .profile-card .detail-row {
+    margin-bottom: 0px;
+    width: unset; }
+  .card .detail-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px; }
-    .profile-card .detail-row > .label {
+    .card .detail-row > .label {
       font-weight: bold; }
-    .profile-card .detail-row > .value {
+    .card .detail-row > .value {
       opacity: 0.9; }
-    .profile-card .detail-row .not-set {
+    .card .detail-row .not-set {
       font-style: italic;
       opacity: 0.5; }
 
@@ -41,7 +24,19 @@
 .login {
   flex-direction: column;
   gap: 10px; }
-  .register > .login-text,
-  .login > .login-text {
+  .register > .text,
+  .login > .text {
     margin-top: 30px;
     opacity: 0.8; }
+
+.login-failed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: red; }
+  .login-failed > i {
+    color: red; }
