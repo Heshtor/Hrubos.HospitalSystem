@@ -1,0 +1,82 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Upravit profil";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/account.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/form.min.css" asp-append-version="true" />
+}
+
+<section class="account-container">
+    <div class="section-header">
+        <h2>Upravit údaje</h2>
+        <p>Zde můžete změnit svou identitu. Policii o tom neřekneme.</p>
+    </div>
+
+    <div class="form-card">
+        <form asp-action="Edit" method="post">
+            <div class="form-group">
+                <label asp-for="FirstName">Jméno</label>
+                <input asp-for="FirstName" placeholder="@(Model.FirstName ?? "Jan")" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName">Příjmení</label>
+                <input asp-for="LastName" placeholder="@(Model.LastName ?? "Novák")" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" placeholder="@Model.Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber">Telefon</label>
+                <input asp-for="PhoneNumber" placeholder="@(Model.PhoneNumber ?? "777 888 999")" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BirthNumber">Rodné číslo</label>
+                <input asp-for="BirthNumber" placeholder="@(Model.BirthNumber ?? "XXXXXX/XXXX")" />
+                <span asp-validation-for="BirthNumber" class="text-danger"></span>
+            </div>
+
+            @if (User.IsInRole(nameof(Roles.Doctor)))
+            {
+                <div class="form-group">
+                    <label asp-for="SpecializationId">Specializace</label>
+                    <select asp-for="SpecializationId" asp-items="ViewBag.SpecializationsList"></select>
+                    <span asp-validation-for="SpecializationId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MaxExaminationPerDay">Maximální počet vyšetření za den</label>
+                    <input asp-for="MaxExaminationPerDay" type="number" min="0" placeholder="@Model.MaxExaminationPerDay" />
+                    <span asp-validation-for="MaxExaminationPerDay" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="buttons">
+                <button type="submit">
+                    <i class='bx bx-save'></i> Uložit změny
+                </button>
+                <a asp-action="Index" class="button">
+                    <i class='bx bx-x-circle'></i> Zrušit
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/validations/FirstLetterCapitalized.js"></script>
+    <script src="~/js/Validations/BirthNumberValidation.js"></script>
+}

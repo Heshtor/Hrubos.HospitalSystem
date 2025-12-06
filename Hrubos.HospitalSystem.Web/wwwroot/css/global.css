@@ -1,5 +1,4 @@
-﻿@charset "UTF-8";
-@font-face {
+﻿@font-face {
   font-family: "Poppins";
   src: url(../fonts/Poppins-ExtraLight.ttf);
   font-weight: 200;
@@ -113,10 +112,12 @@ h2 {
   border-top: 5px dotted #54595F;
   margin: 10px 15px; }
 
-.button-center {
+.buttons {
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; }
 
 button,
 .button {
@@ -129,14 +130,65 @@ button,
   border-radius: 24px;
   padding: 8px 12px;
   cursor: pointer;
-  transition: all .3s;
-  width: max-content; }
+  width: max-content;
+  color: #CACACA !important;
+  font-weight: bold;
+  transition: all 0.3s; }
+  button > i,
+  .button > i {
+    margin-right: 8px;
+    font-size: 24px; }
   button:hover,
   .button:hover {
     background-color: #693F11;
-    color: #CACACA; }
+    transform: translateY(-4px);
+    box-shadow: 2px 2px 0px #CACACA;
+    color: #CACACA !important; }
 
-/* KONEC OBECN�HO */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 100%;
+  gap: 40px; }
+  @media screen and (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr; } }
+  .grid > .card {
+    padding: 30px 20px;
+    text-align: center;
+    border: 4px solid #CACACA;
+    border-radius: 20px;
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease; }
+    .grid > .card > .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border: 4px solid #CACACA;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      transition: all 0.3s ease; }
+      .grid > .card > .icon-wrapper > i {
+        font-size: 40px;
+        color: #CACACA; }
+    .grid > .card > h3 {
+      font-weight: bold;
+      margin-bottom: 10px; }
+    .grid > .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 5px 5px 0px #CACACA; }
+      .grid > .card:hover .icon-wrapper {
+        background-color: #B6B61E;
+        border-color: white; }
+        .grid > .card:hover .icon-wrapper i {
+          color: white; }
+
 /* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 17px;

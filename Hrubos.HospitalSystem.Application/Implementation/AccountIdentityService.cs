@@ -20,7 +20,7 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public async Task<bool> Login(LoginViewModel vm)
         {
-            var result = await signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, true);
+            var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password, true, true);
             return result.Succeeded;
         }
 
@@ -34,7 +34,7 @@ namespace Hrubos.HospitalSystem.Application.Implementation
         {
             User user = new User()
             {
-                UserName = vm.Username,
+                UserName = vm.UserName,
                 FirstName = vm.FirstName,
                 LastName = vm.LastName,
                 Email = vm.Email,

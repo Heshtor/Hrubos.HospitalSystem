@@ -1,21 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Hrubos.HospitalSystem.Domain.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hrubos.HospitalSystem.Application.ViewModels
 {
     public class RegisterViewModel
     {
         [Required]
-        public string? Username { get; set; }
+        public string? UserName { get; set; }
 
+        [FirstLetterCapitalized]
         public string? FirstName { get; set; }
 
+        [FirstLetterCapitalized]
         public string? LastName { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Zadaný formát e-mailové adresy není platný.")]
         public string? Email { get; set; }
 
-        [Phone]
+        [Phone(ErrorMessage = "Zadaný formát telefonního čísla není platný.")]
         public string? PhoneNumber { get; set; }
 
         [Required]

@@ -37,7 +37,16 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public async Task<User> GetCurrentUserAsync(ClaimsPrincipal principal)
         {
-            return await _userManager.GetUserAsync(principal);
+            var userId = _userManager.GetUserId(principal);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return null;
+            }
+
+            return await _userManager.Users
+                .Include(u => u.Specialization)
+                .FirstOrDefaultAsync(u => u.Id == int.Parse(userId));
         }
 
         public async Task<bool> EditUserAsync(User user)

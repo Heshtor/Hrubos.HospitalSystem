@@ -10,5 +10,21 @@
   {
     "outputFile": "wwwroot/css/footer.css",
     "inputFile": "Views/Shared/_Footer.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/privacy.css",
+    "inputFile": "wwwroot/css/privacy.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/home.css",
+    "inputFile": "wwwroot/css/home.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/account.css",
+    "inputFile": "wwwroot/css/account.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/form.css",
+    "inputFile": "wwwroot/css/form.scss"
   }
 ]

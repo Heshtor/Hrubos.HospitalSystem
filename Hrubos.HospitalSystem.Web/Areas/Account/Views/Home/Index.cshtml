@@ -1,0 +1,104 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Můj profil";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/account.min.css" asp-append-version="true" />
+}
+
+<section class="account-container">
+    <div class="section-header">
+        <h2>Můj profil</h2>
+        <p>Vše, co o vás víme (a co jste nám prozradili).</p>
+    </div>
+
+    <div class="profile-card">
+        <div class="profile-icon">
+            <i class='bx bxs-user-circle'></i>
+        </div>
+
+        <div class="profile-details">
+            <div class="detail-row">
+                <span class="label">Uživatelské jméno:</span>
+                <span class="value">@Model.UserName</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Jméno:</span>
+                <span class="value">
+                    @if (!string.IsNullOrEmpty(Model.FirstName))
+                    {
+                        @Model.FirstName
+                    }
+                    else
+                    {
+                        <span class="not-set">Nevyplněno</span>
+                    }
+                </span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Příjmení:</span>
+                <span class="value">
+                    @if (!string.IsNullOrEmpty(Model.LastName))
+                    {
+                        @Model.LastName
+                    }
+                    else
+                    {
+                        <span class="not-set">Nevyplněno</span>
+                    }
+                </span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Email:</span>
+                <span class="value">@Model.Email</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Telefon:</span>
+                <span class="value">
+                    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                    {
+                        @Model.PhoneNumber
+                    }
+                    else
+                    {
+                        <span class="not-set">Nevyplněno</span>
+                    }
+                </span>
+            </div>
+
+            @if (User.IsInRole(nameof(Roles.Doctor)))
+            {
+                <div class="detail-row">
+                    <span class="label">Specializace:</span>
+                    <span class="value">
+                        @if (Model.SpecializationId.HasValue)
+                        {
+                            @Model.Specialization?.Name
+                        }
+                        else
+                        {
+                            <span class="not-set">Nevyplněno</span>
+                        }
+                    </span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Maximální počet vyšetření za den:</span>
+                    <span class="value">@Model.MaxExaminationPerDay</span>
+                </div>
+            }
+        </div>
+
+        <div class="buttons">
+            <a class="button" asp-action="Edit">
+                <i class='bx bx-pencil'></i> Upravit údaje
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,66 @@
+@import "../../wwwroot/css/variables";
+
+.account-container {
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    p {
+        font-style: italic;
+        opacity: 0.8;
+    }
+}
+
+.profile-card {
+    background-color: $pozadi-uvod;
+    border: 4px solid $text;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    box-shadow: 8px 8px 0px $text;
+
+    > .profile-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 54px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        > .label {
+            font-weight: bold;
+        }
+
+        > .value {
+            opacity: 0.9;
+        }
+
+        .not-set {
+            font-style: italic;
+            opacity: 0.5;
+        }
+    }
+}
+
+.register,
+.login {
+    flex-direction: column;
+    gap: 10px;
+
+    > .login-text {
+        margin-top: 30px;
+        opacity: 0.8;
+    }
+}

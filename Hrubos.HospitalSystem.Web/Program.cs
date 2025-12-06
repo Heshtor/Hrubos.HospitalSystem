@@ -49,9 +49,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-    options.LoginPath = "/Security/Account/Login";
-    options.LogoutPath = "/Security/Account/Logout";
-    options.AccessDeniedPath = "/Security/Account/AccessDenied";
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
     options.SlidingExpiration = true;
 
     options.Events.OnRedirectToAccessDenied = context =>
@@ -131,7 +131,15 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-// routes pro area stránky
+// routes pro area Account stránky
+app.MapAreaControllerRoute(
+    name: "AccountArea",
+    areaName: "Account",
+    pattern: "account/{action=Index}/{id?}",
+    defaults: new { controller = "Home" }
+);
+
+// routes pro ostatní area stránky
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
