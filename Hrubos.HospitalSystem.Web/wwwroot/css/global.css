@@ -175,7 +175,7 @@ button,
   width: max-content;
   color: #CACACA !important;
   font-weight: bold;
-  transition: all 0.3s; }
+  transition: all 0.3s !important; }
   button > i,
   .button > i {
     margin-right: 8px;
@@ -183,7 +183,7 @@ button,
   button:hover,
   .button:hover {
     background-color: #693F11;
-    transform: translateY(-4px);
+    transform: translate(-4px, -4px);
     box-shadow: 2px 2px 0px #CACACA;
     color: #CACACA !important; }
 

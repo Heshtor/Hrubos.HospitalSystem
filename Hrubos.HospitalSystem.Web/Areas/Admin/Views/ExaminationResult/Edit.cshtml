@@ -1,39 +1,58 @@
 ﻿@model ExaminationResult
-
 @{
     ViewData["Title"] = "Upravit výsledek vyšetření";
 }
-<h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="All"></div>
-    <div class="mb-3">
-        <label class="form-label">Popis</label>
-        <input class="form-control" placeholder="@Model.Description" asp-for="Description">
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Hodnoty</label>
-        <input class="form-control" placeholder="@Model.Values" asp-for="Values">
-        <span asp-validation-for="Values" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Příloha</label>
-        <input id="File" class="form-control-file" asp-for="Attachment">
-        <span asp-validation-for="Attachment" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">FK</label>
-        <input class="form-control" placeholder="@Model.ExaminationId" asp-for="ExaminationId">
-        <span asp-validation-for="ExaminationId" class="text-danger"></span>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/form.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <div class="card">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Description">Popis</label>
+                <input asp-for="Description" placeholder="@Model.Description" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Values">Hodnoty</label>
+                <input asp-for="Values" placeholder="@(Model.Values ?? "TK: 120/80, Puls: 72")" />
+                <span asp-validation-for="Values" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Attachment">Příloha</label>
+                <input asp-for="Attachment" accept="image/*, application/pdf" />
+                <span asp-validation-for="Attachment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExaminationId">Vyšetření</label>
+                <select asp-for="ExaminationId" asp-items="ViewBag.ExaminationList"></select>
+                <span asp-validation-for="ExaminationId" class="text-danger"></span>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">
+                    <i class='bx bx-save'></i> Uložit změny
+                </button>
+                <a asp-action="Select" class="button">
+                    <i class='bx bx-x-circle'></i> Zrušit
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
 
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/validations/FirstLetterCapitalized.js"></script>
     <script src="~/js/Validations/FileContentValidation.js"></script>
 }

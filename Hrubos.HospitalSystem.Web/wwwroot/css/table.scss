@@ -1,0 +1,121 @@
+@import "../../wwwroot/css/variables";
+
+.section-container {
+    width: 100%;
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        > h2 {
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.card {
+    padding: 20px !important;
+
+    > .table-container {
+        width: 100%;
+        overflow-x: auto;
+
+        > .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+
+            > thead {
+                background-color: $pozadi-menu;
+
+                > tr {
+                    > th {
+                        padding: 14px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        white-space: nowrap;
+
+                        &:first-child {
+                            border-top-left-radius: 10px;
+                        }
+
+                        &:last-child {
+                            border-top-right-radius: 10px;
+                        }
+                    }
+                }
+            }
+
+            > tbody {
+                > tr {
+                    > td {
+                        padding: 14px;
+                        border-bottom: 1px solid $text;
+                        border-right: 1px solid $text;
+
+                        &:last-child {
+                            border-right: none;
+                        }
+
+                        > a {
+                            display: inline-flex;
+
+                            > i {
+                                font-size: 34px;
+                            }
+                        }
+
+                        > .buttons {
+                            flex-wrap: nowrap;
+                            gap: 10px;
+
+                            .button {
+                                padding: 4px;
+                                border: 2px solid $text;
+                                border-radius: 8px;
+
+                                > i {
+                                    margin: 0;
+                                }
+
+                                &.edit {
+                                    background-color: $prvek;
+
+                                    &:hover {
+                                        background-color: $prvek;
+                                    }
+                                }
+
+                                &.delete {
+                                    background-color: $prvek-hover;
+
+                                    &:hover {
+                                        background-color: $prvek-hover;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:last-child td {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+
+        > .empty {
+            padding: 50px 20px;
+
+            > p {
+                font-weight: bold;
+            }
+        }
+    }
+}

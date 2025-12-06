@@ -1,8 +1,9 @@
 ﻿using Hrubos.HospitalSystem.Application.Abstraction;
 using Hrubos.HospitalSystem.Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Hrubos.HospitalSystem.Infrastructure.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 {
@@ -11,11 +12,13 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
     public class ExaminationResultController : Controller
     {
         private readonly IExaminationResultAppService _examinationResultAppService;
+        private readonly IExaminationAppService _examinationAppService;
         private readonly ILogger<ExaminationResultController> _logger;
 
-        public ExaminationResultController(IExaminationResultAppService examinationResultAppService, ILogger<ExaminationResultController> logger)
+        public ExaminationResultController(IExaminationResultAppService examinationResultAppService, IExaminationAppService examinationAppService, ILogger<ExaminationResultController> logger)
         {
             _examinationResultAppService = examinationResultAppService;
+            _examinationAppService = examinationAppService;
             _logger = logger;
         }
 
@@ -29,27 +32,41 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            SetExaminationsSelectList();
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(ExaminationResult examinationResult)
         {
+            var existingExaminationResults = _examinationResultAppService.SelectAll()
+                .FirstOrDefault(r => r.ExaminationId == examinationResult.ExaminationId);
+
+            // Kontrola, zda již pro dané vyšetření existuje výsledek
+            if (existingExaminationResults != null)
+            {
+                ModelState.AddModelError(nameof(ExaminationResult.ExaminationId), "Pro toto vyšetření již výsledek existuje!");
+            }
+
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Vytvoření výsledku vyšetření selhalo kvůli validaci.");
+
+                SetExaminationsSelectList(examinationResult.ExaminationId);
+
                 return View(examinationResult);
             }
 
             try
             {
                 _examinationResultAppService.Create(examinationResult);
-                _logger.LogInformation("Vytvořen nový výsledek vyšetření pro pacienta s ID {ExaminationId}", examinationResult.ExaminationId);
+                _logger.LogInformation("Vytvořen nový výsledek vyšetření s ID {id} pro vyšetření s ID {ExaminationId}.", examinationResult.Id, examinationResult.ExaminationId);
                 return RedirectToAction(nameof(Select));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Chyba při ukládání výsledku vyšetření.");
+                _logger.LogError(ex, "Chyba při vytváření výsledku vyšetření.");
                 return View("Error");
             }
         }
@@ -80,15 +97,29 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            SetExaminationsSelectList(examinationResult.ExaminationId);
+
             return View(examinationResult);
         }
 
         [HttpPost]
         public IActionResult Edit(int id, ExaminationResult examinationResult)
         {
+            var existingExaminationResults = _examinationResultAppService.SelectAll()
+                .FirstOrDefault(r => r.ExaminationId == examinationResult.ExaminationId);
+
+            // Kontrola, zda již pro dané vyšetření existuje výsledek
+            if (existingExaminationResults != null)
+            {
+                ModelState.AddModelError(nameof(ExaminationResult.ExaminationId), "Pro toto vyšetření již výsledek existuje!");
+            }
+
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Editace výsledku vyšetření s ID {id} selhala kvůli validaci.", id);
+
+                SetExaminationsSelectList(examinationResult.ExaminationId);
+
                 return View(examinationResult);
             }
 
@@ -104,6 +135,28 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
                 _logger.LogWarning("Pokus o editaci neexistujícího výsledku vyšetření s ID {id}.", id);
                 return NotFound();
             }
+        }
+
+        void SetExaminationsSelectList(int? examinationId = null)
+        {
+            var allExaminations = _examinationAppService.SelectAll();
+
+            var existingExaminationResults = _examinationResultAppService.SelectAll();
+
+            var takenExaminationIds = existingExaminationResults
+                .Select(r => r.ExaminationId)
+                .Where(id => id != examinationId)
+                .ToList();
+
+            var availableExaminations = allExaminations
+                .Where(e => !takenExaminationIds.Contains(e.Id))
+                .Select(e => new
+                {
+                    Id = e.Id,
+                    DisplayText = $"[{e.Id}] {e.ProblemDescription}"
+                });
+
+            ViewBag.ExaminationList = new SelectList(availableExaminations, "Id", "DisplayText", examinationId);
         }
     }
 }

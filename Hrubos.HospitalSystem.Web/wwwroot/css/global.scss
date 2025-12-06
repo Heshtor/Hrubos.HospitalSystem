@@ -154,7 +154,7 @@ button,
     width: max-content;
     color: $text !important;
     font-weight: bold;
-    transition: all 0.3s;
+    transition: all 0.3s !important;
 
     > i {
         margin-right: 8px;
@@ -163,7 +163,7 @@ button,
 
     &:hover {
         background-color: $prvek-hover;
-        transform: translateY(-4px);
+        transform: translate(-4px, -4px);
         box-shadow: 2px 2px 0px $text;
         color: $text !important;
     }

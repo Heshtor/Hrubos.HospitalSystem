@@ -38,5 +38,9 @@
   {
     "outputFile": "wwwroot/css/form.css",
     "inputFile": "wwwroot/css/form.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/table.css",
+    "inputFile": "wwwroot/css/table.scss"
   }
 ]

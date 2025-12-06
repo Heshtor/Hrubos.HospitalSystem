@@ -1,40 +1,33 @@
-﻿.form-card {
-  background-color: #1E1E1E;
-  border: 4px solid #CACACA;
-  border-radius: 20px;
-  padding: 40px;
+﻿.card .form-group {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  position: relative;
-  box-shadow: 8px 8px 0px #CACACA; }
-  .form-card .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; }
-    .form-card .form-group > label {
-      font-weight: bold;
-      margin-left: 5px; }
-    .form-card .form-group > input,
-    .form-card .form-group > select {
-      padding: 12px 15px;
-      border: 3px solid #CACACA;
-      border-radius: 10px;
-      font-size: 20px;
-      background-color: #333333;
-      transition: all 0.3s ease; }
-      .form-card .form-group > input:focus,
-      .form-card .form-group > select:focus {
-        outline: none;
-        border-color: white; }
-    .form-card .form-group > select {
-      padding: 12px 10px; }
-    .form-card .form-group > .text-danger {
-      text-align: center;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 5px; }
-      .form-card .form-group > .text-danger > span {
-        color: red; }
-  .form-card .buttons {
-    margin-top: 20px; }
+  gap: 8px; }
+  .card .form-group > label {
+    font-weight: bold;
+    margin-left: 5px; }
+  .card .form-group > input,
+  .card .form-group > select {
+    padding: 12px 15px;
+    border: 3px solid #CACACA;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #333333;
+    width: 100%;
+    transition: all 0.3s ease; }
+    .card .form-group > input:focus,
+    .card .form-group > select:focus {
+      outline: none;
+      border-color: white; }
+  .card .form-group > select {
+    padding: 12px 10px; }
+  .card .form-group > .text-danger {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: red; }
+    .card .form-group > .text-danger > span {
+      color: red; }
+
+.card .buttons {
+  margin-top: 20px; }
