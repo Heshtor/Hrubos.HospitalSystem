@@ -2,7 +2,7 @@
 
 namespace Hrubos.HospitalSystem.Application.Abstraction
 {
-    public interface ISystemSettingsAppService
+    public interface ISystemSettingAppService
     {
         IList<SystemSetting> SelectAll();
         void Create(SystemSetting systemSetting);

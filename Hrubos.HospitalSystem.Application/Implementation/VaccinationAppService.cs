@@ -8,9 +8,9 @@ namespace Hrubos.HospitalSystem.Application.Implementation
     public class VaccinationAppService : IVaccinationAppService
     {
         private readonly HospitalSystemDbContext _hospitalSystemDbContext;
-        private readonly ISystemSettingsAppService _systemSettingsAppService;
+        private readonly ISystemSettingAppService _systemSettingsAppService;
 
-        public VaccinationAppService(HospitalSystemDbContext hospitalSystemDbContext, ISystemSettingsAppService systemSettingsAppService)
+        public VaccinationAppService(HospitalSystemDbContext hospitalSystemDbContext, ISystemSettingAppService systemSettingsAppService)
         {
             _hospitalSystemDbContext = hospitalSystemDbContext;
             _systemSettingsAppService = systemSettingsAppService;

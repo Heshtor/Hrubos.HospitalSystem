@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doctor))]
+    [Authorize(Roles = nameof(Roles.Admin))]
     public class VaccinationController : Controller
     {
         private readonly IVaccinationAppService _vaccinationAppService;

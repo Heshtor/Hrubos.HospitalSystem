@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hrubos.HospitalSystem.Application.Implementation
 {
-    public class SystemSettingsAppService : ISystemSettingsAppService
+    public class SystemSettingAppService : ISystemSettingAppService
     {
         private readonly HospitalSystemDbContext _hospitalSystemDbContext;
 
-        public SystemSettingsAppService(HospitalSystemDbContext hospitalSystemDbContext)
+        public SystemSettingAppService(HospitalSystemDbContext hospitalSystemDbContext)
         {
             _hospitalSystemDbContext = hospitalSystemDbContext;
         }

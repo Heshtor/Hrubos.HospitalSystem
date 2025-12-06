@@ -84,7 +84,7 @@ builder.Services.AddScoped<ISpecializationAppService, SpecializationAppService>(
 builder.Services.AddScoped<IExaminationTypeAppService, ExaminationTypeAppService>();
 builder.Services.AddScoped<IExaminationResultAppService, ExaminationResultAppService>();
 builder.Services.AddScoped<IExaminationAppService, ExaminationAppService>();
-builder.Services.AddScoped<ISystemSettingsAppService, SystemSettingsAppService>();
+builder.Services.AddScoped<ISystemSettingAppService, SystemSettingAppService>();
 builder.Services.AddScoped<IVaccinationAppService, VaccinationAppService>();
 builder.Services.AddScoped<IVaccineTypeAppService, VaccineTypeAppService>();
 builder.Services.AddScoped<IDoctorPatientAppService, DoctorPatientAppService>();
