@@ -85,18 +85,26 @@
                                 }
 
                                 &.edit {
-                                    background-color: $prvek;
+                                    background-color: royalblue;
 
                                     &:hover {
-                                        background-color: $prvek;
+                                        background-color: royalblue;
                                     }
                                 }
 
                                 &.delete {
-                                    background-color: $prvek-hover;
+                                    background-color: darkred;
 
                                     &:hover {
-                                        background-color: $prvek-hover;
+                                        background-color: darkred;
+                                    }
+                                }
+
+                                &.create {
+                                    background-color: green;
+
+                                    &:hover {
+                                        background-color: green;
                                     }
                                 }
                             }

@@ -51,13 +51,17 @@
             .card > .table-container > .table > tbody > tr > td > .buttons .button > i {
               margin: 0; }
             .card > .table-container > .table > tbody > tr > td > .buttons .button.edit {
-              background-color: #995B18; }
+              background-color: royalblue; }
               .card > .table-container > .table > tbody > tr > td > .buttons .button.edit:hover {
-                background-color: #995B18; }
+                background-color: royalblue; }
             .card > .table-container > .table > tbody > tr > td > .buttons .button.delete {
-              background-color: #693F11; }
+              background-color: darkred; }
               .card > .table-container > .table > tbody > tr > td > .buttons .button.delete:hover {
-                background-color: #693F11; }
+                background-color: darkred; }
+            .card > .table-container > .table > tbody > tr > td > .buttons .button.create {
+              background-color: green; }
+              .card > .table-container > .table > tbody > tr > td > .buttons .button.create:hover {
+                background-color: green; }
       .card > .table-container > .table > tbody > tr:last-child td {
         border-bottom: 1px solid #CACACA; }
     .card > .table-container > .empty {
