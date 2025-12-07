@@ -1,0 +1,68 @@
+﻿@model ExaminationResult
+@{
+    ViewData["Title"] = "Detail výsledku vyšetření";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Popis</th>
+                        <th scope="col">Hodnoty</th>
+                        <th scope="col">Příloha</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>@Model.Description</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(Model.Values))
+                            {
+                                <span>@Model.Values</span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(Model.AttachmentSrc))
+                            {
+                                <a href="@Model.AttachmentSrc" target="_blank" title="zobrazit přílohu">
+                                    <i class='bx bx-file'></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="buttons" style="margin-top: 20px;">
+            <a asp-controller="Examination" asp-action="Select" asp-route-patientId="@Model.Examination.PatientId" class="button">
+                <i class='bx bx-arrow-back'></i> Zpět
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
