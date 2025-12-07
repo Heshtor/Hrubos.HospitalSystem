@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Doktor panel";
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        <p class="subtitle">Přehled vaší ordinace</p>
+    </div>
+
+    <div class="grid">
+        <a asp-area="Doctor" asp-controller="Patient" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-group'></i>
+            </div>
+
+            <h3>Moji pacienti</h3>
+
+            <p>Seznam pacientů v péči, jejich vyšetření a očkování</p>
+        </a>
+
+        <a asp-area="Doctor" asp-controller="Patient" asp-action="Create" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-user-plus'></i>
+            </div>
+
+            <h3>Přidat pacienta</h3>
+
+            <p>Přiřadit nového pacienta do své péče</p>
+        </a>
+
+        <a asp-area="Account" asp-controller="Home" asp-action="Index" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-user-circle'></i>
+            </div>
+
+            <h3>Můj profil a limity</h3>
+
+            <p>Úprava osobních údajů a nastavení denní kapacity</p>
+        </a>
+    </div>
+</section>
