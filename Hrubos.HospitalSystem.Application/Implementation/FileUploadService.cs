@@ -32,5 +32,26 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
             return filePathOutput;
         }
+
+        public void DeleteFile(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) return;
+
+            var relativePath = path.TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+            var fullPath = Path.Combine(this.RootPath, relativePath);
+
+            if (File.Exists(fullPath))
+            {
+                try
+                {
+                    File.Delete(fullPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Chyba při mazání souboru: {ex.Message}");
+                }
+            }
+        }
     }
 }

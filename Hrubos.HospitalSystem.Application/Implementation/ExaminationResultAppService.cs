@@ -43,6 +43,11 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
             if (examinationResult != null)
             {
+                if (!string.IsNullOrEmpty(examinationResult.AttachmentSrc))
+                {
+                    _fileUploadService.DeleteFile(examinationResult.AttachmentSrc);
+                }
+
                 _hospitalSystemDbContext.ExaminationResults.Remove(examinationResult);
                 _hospitalSystemDbContext.SaveChanges();
                 deleted = true;
@@ -62,8 +67,17 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
             if (newExaminationResult.Attachment != null)
             {
+                if (!string.IsNullOrEmpty(examinationResult.AttachmentSrc))
+                {
+                    _fileUploadService.DeleteFile(examinationResult.AttachmentSrc);
+                }
+
                 string attachmentSrc = _fileUploadService.FileUpload(newExaminationResult.Attachment, Path.Combine("attachments", "examinationResults"));
                 newExaminationResult.AttachmentSrc = attachmentSrc;
+            }
+            else
+            {
+                newExaminationResult.AttachmentSrc = examinationResult.AttachmentSrc;
             }
 
             _hospitalSystemDbContext.Entry(examinationResult).CurrentValues.SetValues(newExaminationResult);
@@ -74,7 +88,9 @@ namespace Hrubos.HospitalSystem.Application.Implementation
 
         public ExaminationResult GetById(int id)
         {
-            return _hospitalSystemDbContext.ExaminationResults.FirstOrDefault(e => e.Id == id);
+            return _hospitalSystemDbContext.ExaminationResults
+                .Include(er => er.Examination)
+                .FirstOrDefault(e => e.Id == id);
         }
     }
 }
