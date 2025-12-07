@@ -1,0 +1,39 @@
+﻿@model DoctorPatient
+@{
+    ViewData["Title"] = "Přidat pacienta do své péče";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/form.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="PatientId">Vyberte pacienta</label>
+                <select asp-for="PatientId" asp-items="ViewBag.PatientsList"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">
+                    <i class='bx bx-save'></i> Přidat do své péče
+                </button>
+                <a asp-action="Select" class="button">
+                    <i class='bx bx-x-circle'></i> Zrušit
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

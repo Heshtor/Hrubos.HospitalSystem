@@ -1,0 +1,70 @@
+﻿@model IList<DoctorPatient>
+@{
+    ViewData["Title"] = "Pacienti v mé péči";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        
+        <a asp-action="Create" class="button">
+            <i class='bx bx-plus'></i> Nový pacient do své péče
+        </a>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Pacient</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Patient.FirstName @item.Patient.LastName (@item.Patient.UserName)</td>
+                                <td>
+                                    <div class="buttons">
+                                        <a asp-controller="Examination" asp-action="Select" asp-route-patientId="@item.PatientId" class="button" title="zobrazit vyšetření pacienta">
+                                            <i class='bx bx-file'></i>
+                                        </a>
+
+                                        <a asp-controller="Vaccination" asp-action="Select" asp-route-patientId="@item.PatientId" class="button" title="zobrazit očkování pacienta">
+                                            <i class='bx bx-injection'></i>
+                                        </a>
+
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="odebrat pacienta ze své péče">
+                                            <i class='bx bx-user-minus'></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Nemáte žádného pacienta ve své péči.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
