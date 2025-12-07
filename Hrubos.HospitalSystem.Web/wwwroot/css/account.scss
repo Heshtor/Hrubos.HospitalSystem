@@ -11,24 +11,28 @@
         width: unset;
     }
 
-    .detail-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
+    > .profile-details {
+        width: 100%;
 
-        > .label {
-            font-weight: bold;
-        }
+        > .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
 
-        > .value {
-            opacity: 0.9;
-        }
+            > .label {
+                font-weight: bold;
+            }
 
-        .not-set {
-            font-style: italic;
-            opacity: 0.5;
+            > .value {
+                opacity: 0.9;
+            }
+
+            .not-set {
+                font-style: italic;
+                opacity: 0.5;
+            }
         }
     }
 }

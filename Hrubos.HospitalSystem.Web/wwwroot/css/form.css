@@ -1,4 +1,7 @@
-﻿.card .form-group {
+﻿.card > form {
+  width: 100%; }
+
+.card .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px; }

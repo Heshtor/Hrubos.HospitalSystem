@@ -1,6 +1,10 @@
 @import "../../wwwroot/css/variables";
 
 .card {
+    > form {
+        width: 100%;
+    }
+
     .form-group {
         display: flex;
         flex-direction: column;

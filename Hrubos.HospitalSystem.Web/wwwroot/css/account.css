@@ -6,19 +6,21 @@
     justify-content: center;
     margin-bottom: 0px;
     width: unset; }
-  .card .detail-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px; }
-    .card .detail-row > .label {
-      font-weight: bold; }
-    .card .detail-row > .value {
-      opacity: 0.9; }
-    .card .detail-row .not-set {
-      font-style: italic;
-      opacity: 0.5; }
+  .card > .profile-details {
+    width: 100%; }
+    .card > .profile-details > .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px; }
+      .card > .profile-details > .detail-row > .label {
+        font-weight: bold; }
+      .card > .profile-details > .detail-row > .value {
+        opacity: 0.9; }
+      .card > .profile-details > .detail-row .not-set {
+        font-style: italic;
+        opacity: 0.5; }
 
 .register,
 .login {

@@ -12,7 +12,8 @@
       margin-bottom: 0px; }
 
 .card {
-  padding: 20px !important; }
+  padding: 20px !important;
+  max-width: 100% !important; }
   .card > .table-container {
     width: 100%;
     overflow-x: auto; }
