@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Pacient panel";
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        <p class="subtitle">Spravujte své zdraví na jednom místě.</p>
+    </div>
+
+    <div class="grid">
+        <a asp-area="Patient" asp-controller="Examination" asp-action="Create" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-calendar-plus'></i>
+            </div>
+
+            <h3>Objednat se</h3>
+
+            <p>Rezervovat termín vyšetření u lékaře</p>
+        </a>
+
+        <a asp-area="Patient" asp-controller="Vaccination" asp-action="Create" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-injection'></i>
+            </div>
+
+            <h3>Očkování</h3>
+
+            <p>Rezervovat termín vakcinace</p>
+        </a>
+
+        <a asp-area="Patient" asp-controller="Examination" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-history'></i>
+            </div>
+
+            <h3>Moje vyšetření</h3>
+
+            <p>Historie, nálezy a zprávy</p>
+        </a>
+
+        <a asp-area="Patient" asp-controller="Vaccination" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-shield-quarter'></i>
+            </div>
+
+            <h3>Moje očkování</h3>
+
+            <p>Přehled absolvovaných vakcín</p>
+        </a>
+
+        <a asp-area="Account" asp-controller="Home" asp-action="Index" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-user-circle'></i>
+            </div>
+
+            <h3>Můj profil</h3>
+
+            <p>Úprava osobních údajů</p>
+        </a>
+    </div>
+</section>
