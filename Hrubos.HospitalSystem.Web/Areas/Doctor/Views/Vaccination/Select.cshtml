@@ -1,0 +1,67 @@
+﻿@model IList<Vaccination>
+@{
+    ViewData["Title"] = ViewBag.PatientName != null ? $"Očkování pacienta: {ViewBag.PatientName}" : "Očkování pacienta";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datum a čas</th>
+                            <th scope="col">Typ vakcinace</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (item.VaccineType != null)
+                                    {
+                                        <span>@item.VaccineType.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>                         
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Tento pacient nemá evidované žádné očkování.</p>
+            </div>
+        }
+
+        <div style="margin-top: 20px;">
+            <a asp-controller="Patient" asp-action="Select" class="button">
+                <i class='bx bx-arrow-back'></i> Zpět na seznam pacientů
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
