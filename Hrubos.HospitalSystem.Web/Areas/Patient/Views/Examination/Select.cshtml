@@ -1,0 +1,119 @@
+﻿@model IList<Examination>
+@{
+    ViewData["Title"] = "Moje vyšetření";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+
+        <a asp-action="Create" class="button">
+            <i class='bx bx-calendar-plus'></i> Objednat se na vyšetření
+        </a>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datum a čas</th>
+                            <th scope="col">Typ vyšetření</th>
+                            <th scope="col">Popis problému</th>
+                            <th scope="col">Lékař</th>
+                            <th scope="col">Výsledek</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DateTime.ToString("dd.MM.yyyy HH:mm")
+                                </td>
+                                <td>
+                                    @if (item.ExaminationType != null)
+                                    {
+                                        <span>@item.ExaminationType.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>@item.ProblemDescription</td>
+                                <td>
+                                    @if (item.Doctor != null)
+                                    {
+                                        <span>@item.Doctor.FirstName @item.Doctor.LastName (@item.Doctor.UserName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Result != null)
+                                    {
+                                        <a asp-controller="ExaminationResult" asp-action="Select" asp-route-id="@item.Result.Id" class="button" title="zobrazit zprávu od lékaře">
+                                            <i class='bx bx-file'></i> Zobrazit výsledek
+                                        </a>
+                                    }
+                                    else if (item.DateTime < DateTime.Now)
+                                    {
+                                        <span class="text-warning">Čeká se na uzavření lékařem</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Plánováno</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="buttons">
+                                        @if (item.Result == null)
+                                        {
+                                            @if (item.DateTime > DateTime.Now)
+                                            {
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="zrušit termín">
+                                                    <i class='bx bx-x-circle'></i> Zrušit
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span title="Termín již vypršel"><i class='bx bx-x'></i> Nelze zrušit</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span><i class='bx bx-check'></i> Hotovo</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Zatím nemáte naplánovaná žádná vyšetření ani historii.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}

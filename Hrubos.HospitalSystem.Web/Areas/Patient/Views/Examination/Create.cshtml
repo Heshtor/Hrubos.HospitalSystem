@@ -1,0 +1,62 @@
+﻿@model Examination
+@{
+    ViewData["Title"] = "Objednat se na vyšetření";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/form.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="DoctorId">Váš ošetřující lékař</label>
+                <select asp-for="DoctorId" asp-items="ViewBag.DoctorsList" class="custom-select"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateTime">Požadovaný termín</label>
+                <input asp-for="DateTime"
+                       type="datetime-local"
+                       asp-format="{0:yyyy-MM-ddTHH:mm}"
+                       min="@DateTime.Now.AddDays(2).Date.ToString("yyyy-MM-ddTHH:mm")"
+                       value="@(Model.DateTime == DateTime.MinValue ? DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm") : Model.DateTime.ToString("yyyy-MM-ddTHH:mm"))" />
+
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExaminationTypeId">Typ vyšetření</label>
+                <select asp-for="ExaminationTypeId" asp-items="ViewBag.ExaminationTypesList"></select>
+                <span asp-validation-for="ExaminationTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProblemDescription">Popis problému</label>
+                <input asp-for="ProblemDescription" placeholder="Vysoký tlak" />
+                <span asp-validation-for="ProblemDescription" class="text-danger"></span>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">
+                    <i class='bx bx-calendar-check'></i> Objednat se
+                </button>
+                <a asp-action="Select" class="button">
+                    <i class='bx bx-x-circle'></i> Zrušit
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
