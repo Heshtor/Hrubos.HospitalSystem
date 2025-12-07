@@ -1,0 +1,80 @@
+﻿@model IList<Vaccination>
+@{
+    ViewData["Title"] = "Moje očkování";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+
+        <a asp-action="Create" class="button">
+            <i class='bx bx-plus-medical'></i> Objednat se na očkování
+        </a>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datum a čas</th>
+                            <th scope="col">Typ vakcíny</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (item.VaccineType != null)
+                                    {
+                                        <span>@item.VaccineType.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="buttons">
+                                        @if (item.DateTime > DateTime.Now)
+                                        {
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="zrušit termín">
+                                                <i class='bx bx-x-circle'></i> Zrušit
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span><i class='bx bx-check'></i> Proběhlo</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Zatím nemáte naplánovaná žádná očkování ani historii.</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
