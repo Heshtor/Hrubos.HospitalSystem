@@ -27,51 +27,6 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(SystemSetting systemSetting)
-        {
-            if (!ModelState.IsValid)
-            {
-                _logger.LogWarning("Vytvoření nastavení v nemocničním systému selhalo kvůli validaci.");
-
-                return View(systemSetting);
-            }
-
-            try
-            {
-                _systemSettingAppService.Create(systemSetting);
-                _logger.LogInformation("Vytvořeno nové nastavení v nemocničním systému s ID {id}.", systemSetting.Id);
-                return RedirectToAction(nameof(Select));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Chyba při vytváření nastavení v nemocničním systému.");
-                return View("Error");
-            }
-        }
-
-        public IActionResult Delete(int id)
-        {
-            bool deleted = _systemSettingAppService.Delete(id);
-
-            if (deleted)
-            {
-                _logger.LogInformation("Smazáno nastavení v nemocničním systému s ID {id}.", id);
-                return RedirectToAction(nameof(Select));
-            }
-            else
-            {
-                _logger.LogWarning("Pokus o smazání neexistujícího nastavení v nemocničním systému s ID {id}.", id);
-                return NotFound();
-            }
-        }
-
-        [HttpGet]
         public IActionResult Edit(int id)
         {
             var systemSetting = _systemSettingAppService.GetById(id);
