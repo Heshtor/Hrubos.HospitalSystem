@@ -157,7 +157,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Chyba při editaci vakcinace.");
+                _logger.LogError(ex, "Chyba při editaci vyšetření.");
                 return View("Error");
             }
         }

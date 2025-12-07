@@ -25,15 +25,15 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="ProblemDescription">Popis problému</label>
-                <input asp-for="ProblemDescription" placeholder="@Model.ProblemDescription" />
-                <span asp-validation-for="ProblemDescription" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
                 <label asp-for="ExaminationTypeId">Typ vyšetření</label>
                 <select asp-for="ExaminationTypeId" asp-items="ViewBag.ExaminationTypesList"></select>
                 <span asp-validation-for="ExaminationTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProblemDescription">Popis problému</label>
+                <input asp-for="ProblemDescription" placeholder="@Model.ProblemDescription" />
+                <span asp-validation-for="ProblemDescription" class="text-danger"></span>
             </div>
 
             <div class="form-group">

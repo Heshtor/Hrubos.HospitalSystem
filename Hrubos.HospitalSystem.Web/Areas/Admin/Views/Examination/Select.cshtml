@@ -26,8 +26,8 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Datum a čas</th>
-                            <th scope="col">Popis problému</th>
                             <th scope="col">Typ vyšetření</th>
+                            <th scope="col">Popis problému</th>
                             <th scope="col">Pacient</th>
                             <th scope="col">Doktor</th>
                             <th scope="col">Akce</th>
@@ -43,7 +43,7 @@
                                 <td>
                                     @if (item.ExaminationType != null)
                                     {
-                                        <span class="exam-link">[@item.ExaminationType.Id] @item.ExaminationType.Name</span>
+                                        <span>[@item.ExaminationType.Id] @item.ExaminationType.Name</span>
                                     }
                                     else
                                     {
@@ -54,7 +54,7 @@
                                 <td>
                                     @if (item.Patient != null)
                                     {
-                                        <span class="exam-link">[@item.Patient.Id] @item.Patient.UserName</span>
+                                        <span>[@item.Patient.Id] @item.Patient.UserName</span>
                                     }
                                     else
                                     {
@@ -64,7 +64,7 @@
                                 <td>
                                     @if (item.Doctor != null)
                                     {
-                                        <span class="exam-link">[@item.Doctor.Id] @item.Doctor.UserName</span>
+                                        <span>[@item.Doctor.Id] @item.Doctor.UserName</span>
                                     }
                                     else
                                     {
