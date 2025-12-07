@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Admin panel";
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+        <p class="subtitle">Plná kontrola nad systémem.</p>
+    </div>
+
+    <div class="grid">
+        <a asp-area="Admin" asp-controller="SecurityIdentity" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-user-voice'></i>
+            </div>
+
+            <h3>Správa uživatelů</h3>
+
+            <p>Lékaři, pacienti a role</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="DoctorPatient" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-link'></i>
+            </div>
+
+            <h3>Vazby Doktor-Pacient</h3>
+
+            <p>Přiřazování pacientů k lékařům</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Specialization" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-badge-check'></i>
+            </div>
+
+            <h3>Specializace</h3>
+
+            <p>Správa odborností lékařů</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="ExaminationType" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-list-ul'></i>
+            </div>
+
+            <h3>Typy vyšetření</h3>
+
+            <p>Definice procedur a úkonů</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="VaccineType" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-vial'></i>
+            </div>
+
+            <h3>Typy vakcín</h3>
+
+            <p>Seznam dostupných očkovacích látek</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Examination" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-pulse'></i>
+            </div>
+
+            <h3>Přehled vyšetření</h3>
+
+            <p>Globální seznam všech termínů</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="ExaminationResult" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-file-find'></i>
+            </div>
+
+            <h3>Výsledky vyšetření</h3>
+
+            <p>Centrální evidence výsledků vyšetření</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Vaccination" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-injection'></i>
+            </div>
+
+            <h3>Přehled vakcinací</h3>
+
+            <p>Globální seznam očkování</p>
+        </a>
+
+        <a asp-area="Admin" asp-controller="SystemSetting" asp-action="Select" class="card">
+            <div class="icon-wrapper">
+                <i class='bx bx-slider-alt'></i>
+            </div>
+
+            <h3>Nastavení systému</h3>
+
+            <p>Konfigurace, limity a parametry</p>
+        </a>
+    </div>
+</section>
