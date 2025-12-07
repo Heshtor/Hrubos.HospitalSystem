@@ -1,0 +1,132 @@
+﻿@model IList<Examination>
+@{
+    ViewData["Title"] = ViewBag.PatientName != null ? $"Vyšetření pacienta: {ViewBag.PatientName}" : "Vyšetření pacienta";
+    int currentDoctorId = ViewBag.CurrentDoctorId;
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/table.min.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="section-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datum a čas</th>
+                            <th scope="col">Typ vyšetření</th>
+                            <th scope="col">Popis problému</th>
+                            <th scope="col">Doktor</th>
+                            <th scope="col">Výsledek</th>
+                            <th scope="col">Akce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            bool isMine = item.DoctorId == currentDoctorId;
+
+                            <tr style="@(isMine ? "background-color: rgba(0, 255, 0, 0.1);" : "")">
+                                <td>@item.DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (item.ExaminationType != null)
+                                    {
+                                        <span>@item.ExaminationType.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>neznámý</span>
+                                    }
+                                </td>
+                                <td>@item.ProblemDescription</td>
+                                <td>
+                                    @if (isMine)
+                                    {
+                                        <strong>JÁ</strong>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.Doctor?.FirstName @item.Doctor?.LastName (@item.Doctor?.UserName)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if(item.Result != null)
+                                    {
+                                        <div class="buttons">
+                                            <a asp-controller="ExaminationResult" asp-action="Select" asp-route-id="@item.Result.Id" class="button" title="zobrazit výsledek vyšetření">
+                                                <i class='bx bx-show'></i>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="buttons">
+                                        @if (isMine)
+                                        {                                           
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="button edit" title="upravit termín vyšetření">
+                                                <i class='bx bx-pencil'></i>
+                                            </a>
+
+                                            @if (item.Result == null)
+                                            {
+                                                <a asp-controller="ExaminationResult" asp-action="Create" asp-route-examinationId="@item.Id" class="button create" title="zapsat výsledek vyšetření">
+                                                    <i class='bx bx-test-tube'></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="ExaminationResult" asp-action="Delete" asp-route-id="@item.Result.Id" class="button delete" onclick="return ConfirmDelete();" title="smazat výsledek vyšetření">
+                                                    <i class='bx bx-x'></i>
+                                                </a>
+                                            }
+
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="button delete" onclick="return ConfirmDelete();" title="zrušit vyšetření">
+                                                <i class='bx bx-trash'></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                <i class='bx bxs-lock-alt'></i> <span>Toto vyšetření provádí jiný lékař</span>
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty">
+                <p>Tento pacient zatím nemá žádná vyšetření.</p>
+            </div>
+        }
+
+        <div style="margin-top: 20px;">
+            <a asp-controller="Patient" asp-action="Select" class="button">
+                <i class='bx bx-arrow-back'></i> Zpět na seznam svých pacientů
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}
