@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hrubos.HospitalSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class mysql_100_new_initial : Migration
+    public partial class mysql_100_init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -205,7 +205,7 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ProblemDescription = table.Column<string>(type: "longtext", nullable: true)
+                    ProblemDescription = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ExaminationTypeId = table.Column<int>(type: "int", nullable: true),
                     PatientId = table.Column<int>(type: "int", nullable: true),
@@ -418,17 +418,17 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "SystemSetting",
                 columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 1, "MaxVaccinationPerDay", "20" });
+                values: new object[] { 1, "MaxVaccinationsPerDay", "20" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "BirthNumber", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "MaxExaminationPerDay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "SpecializationId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, null, "1a174d18-905f-485b-b1a7-8f94437fc615", "admin@admin.cz", true, "Admin", "Martin", true, null, 0, "ADMIN@ADMIN.CZ", "ADMIN", "AQAAAAEAACcQAAAAEC4prnSMIdRUykdd65G87+g3lLCc9cqJ/re6T1TsQFv5xlMrmVIe4k7yMQiEYWpH3A==", null, false, "88e7e00c35b7437398cca7c6b8ae0969", null, false, "admin" },
-                    { 6, 0, "050510/2224", "ee3774fd-818b-4b94-b275-2bf14ef0f755", "tomas.horak@email.cz", true, "Tomáš", "Horák", true, null, 0, "TOMAS.HORAK@EMAIL.CZ", "PATIENT1", "AQAAAAEAACcQAAAAEBacwHfAQ8oysuC+yEOFP2TakEie2+73wHf89V+TJX+Ioy5NfCTZkS0U/P5kN7yjmg==", "601111111", false, "bdddfcb81de347a7a5cabd831fe48b0f", null, false, "patient1" },
-                    { 7, 0, "855801/0406", "34c88d3f-ba51-4e04-8d46-a9f887a3e119", "anna.mala@email.cz", true, "Anna", "Malá", true, null, 0, "ANNA.MALA@EMAIL.CZ", "PATIENT2", "AQAAAAEAACcQAAAAEK31Pd3GzmAcXrVtoSezhRdeqGp0l5c6Zl0IjUvn6vAeslrjG7bgOuN4jHqQBRDbZA==", "602222222", false, "7f4eed24be3b493ab523a0dd8fa645d2", null, false, "patient2" },
-                    { 8, 0, "920808/8032", "bcff5923-7a82-4af7-8d06-2641d1747f2b", "karel.novotny@email.cz", true, "Karel", "Novotný", true, null, 0, "KAREL.NOVOTNY@EMAIL.CZ", "PATIENT3", "AQAAAAEAACcQAAAAEGDwHucn5uWF1684moFrwbqoaym+z0IHUiN+/EDQnXgz6HiEbGnaqFT136phybDc4g==", "603333333", false, "53599ee32caa4e93b483e1bb40077e71", null, false, "patient3" }
+                    { 1, 0, null, "fcd82561-a728-4982-bb84-203c22bd695d", "admin@admin.cz", true, "Admin", "Martin", true, null, 0, "ADMIN@ADMIN.CZ", "ADMIN", "AQAAAAEAACcQAAAAEC4prnSMIdRUykdd65G87+g3lLCc9cqJ/re6T1TsQFv5xlMrmVIe4k7yMQiEYWpH3A==", null, false, "48d685f00a9b40f2a161b23ec17af18e", null, false, "admin" },
+                    { 6, 0, "050510/2224", "1a55ba27-9cbd-40d9-a6d7-c88c53e196ab", "tomas.horak@email.cz", true, "Tomáš", "Horák", true, null, 0, "TOMAS.HORAK@EMAIL.CZ", "PATIENT1", "AQAAAAEAACcQAAAAEBacwHfAQ8oysuC+yEOFP2TakEie2+73wHf89V+TJX+Ioy5NfCTZkS0U/P5kN7yjmg==", "601111111", false, "ff20dde0bf124273b30aa848be5dd6f6", null, false, "patient1" },
+                    { 7, 0, "855801/0406", "15328eef-6f93-49f2-b670-5e9377b6e316", "anna.mala@email.cz", true, "Anna", "Malá", true, null, 0, "ANNA.MALA@EMAIL.CZ", "PATIENT2", "AQAAAAEAACcQAAAAEK31Pd3GzmAcXrVtoSezhRdeqGp0l5c6Zl0IjUvn6vAeslrjG7bgOuN4jHqQBRDbZA==", "602222222", false, "fea4280d118141ea8ad96772f5894c3b", null, false, "patient2" },
+                    { 8, 0, "920808/8032", "659a392c-e04a-4c0c-ac51-57be5e8559c3", "karel.novotny@email.cz", true, "Karel", "Novotný", true, null, 0, "KAREL.NOVOTNY@EMAIL.CZ", "PATIENT3", "AQAAAAEAACcQAAAAEGDwHucn5uWF1684moFrwbqoaym+z0IHUiN+/EDQnXgz6HiEbGnaqFT136phybDc4g==", "603333333", false, "0cf9f4dd524c4d93a415dec579b84b39", null, false, "patient3" }
                 });
 
             migrationBuilder.InsertData(
@@ -457,10 +457,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "BirthNumber", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "MaxExaminationPerDay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "SpecializationId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 2, 0, null, "93f4a1d3-158e-4fa0-8d08-764e70dce14d", "jan.novak@nemocnice.cz", true, "Jan", "Novák", true, null, 10, "JAN.NOVAK@NEMOCNICE.CZ", "DOCTOR1", "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==", "111222333", false, "733739cee0194ba7a09c2aed3fd9e7b1", 1, false, "doctor1" },
-                    { 3, 0, null, "3d59f31f-94f6-4535-ba9e-8b18147fc137", "petr.svoboda@nemocnice.cz", true, "Petr", "Svoboda", true, null, 5, "PETR.SVOBODA@NEMOCNICE.CZ", "DOCTOR2", "AQAAAAEAACcQAAAAEK4DkND+5IwQiNI01DelkSwKPGQnzZAxCmobmvF3J0w5Xr6YO4bUtzjJwe2qRzUv7g==", "222333444", false, "9704108d3a1a4efebe344ae78980c2f4", 2, false, "doctor2" },
-                    { 4, 0, null, "c9885337-8037-4a88-b93c-6d7f997b3a8e", "lucie.dvorakova@nemocnice.cz", true, "Lucie", "Dvořáková", true, null, 2, "LUCIE.DVORAKOVA@NEMOCNICE.CZ", "DOCTOR3", "AQAAAAEAACcQAAAAEMK02V+4Wdm0lgraNwSBHPhhYUFmVpoCrp103XwzNXTFK6/s8xx0AAdpsd2G2KquQQ==", "333444555", false, "520ff02ea7584ad380a0121d9763a47c", 3, false, "doctor3" },
-                    { 5, 0, null, "652043ed-e151-4263-8711-4141fdc45a13", "arnost.patek@nemocnice.cz", true, "Arnošt", "Pátek", true, null, 0, "ARNOST.PATEK@NEMOCNICE.CZ", "DOCTOR4", "AQAAAAEAACcQAAAAEGrcdYyAHwCXTbk9VS3VItkcEq4bhgiPBFetA8rLbp/6Asw87PI2TqWE5csu8u6TDA==", "444555666", false, "3441b987d50249b1a12253ff597e31fd", 2, false, "doctor4" }
+                    { 2, 0, null, "9a27bf73-a31f-419e-815e-67f3f377ba41", "jan.novak@nemocnice.cz", true, "Jan", "Novák", true, null, 10, "JAN.NOVAK@NEMOCNICE.CZ", "DOCTOR1", "AQAAAAEAACcQAAAAECxrKr4YAVakrkIYFy7MgUA11ryq0Sgun00+cj9FnR6EHzH8EL9WRc3J60f5x2nv0g==", "111222333", false, "8f2a1471084c40afa4b538594ae6b318", 1, false, "doctor1" },
+                    { 3, 0, null, "d29b6fc1-befe-4919-a0f0-4081f180ce4f", "petr.svoboda@nemocnice.cz", true, "Petr", "Svoboda", true, null, 5, "PETR.SVOBODA@NEMOCNICE.CZ", "DOCTOR2", "AQAAAAEAACcQAAAAEK4DkND+5IwQiNI01DelkSwKPGQnzZAxCmobmvF3J0w5Xr6YO4bUtzjJwe2qRzUv7g==", "222333444", false, "0adef10c0dfb4fcf86471fd9a2364efc", 2, false, "doctor2" },
+                    { 4, 0, null, "df9515fe-dd1d-4f21-b1a3-637978f4f6f8", "lucie.dvorakova@nemocnice.cz", true, "Lucie", "Dvořáková", true, null, 2, "LUCIE.DVORAKOVA@NEMOCNICE.CZ", "DOCTOR3", "AQAAAAEAACcQAAAAEMK02V+4Wdm0lgraNwSBHPhhYUFmVpoCrp103XwzNXTFK6/s8xx0AAdpsd2G2KquQQ==", "333444555", false, "f365b34905dc4391aee6173c400f1540", 3, false, "doctor3" },
+                    { 5, 0, null, "10ed9b52-617b-427d-abaf-36e3495a3d5a", "arnost.patek@nemocnice.cz", true, "Arnošt", "Pátek", true, null, 0, "ARNOST.PATEK@NEMOCNICE.CZ", "DOCTOR4", "AQAAAAEAACcQAAAAEGrcdYyAHwCXTbk9VS3VItkcEq4bhgiPBFetA8rLbp/6Asw87PI2TqWE5csu8u6TDA==", "444555666", false, "cace192898d844448e1ea36f47958e53", 2, false, "doctor4" }
                 });
 
             migrationBuilder.InsertData(
@@ -468,10 +468,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                 columns: new[] { "Id", "DateTime", "PatientId", "VaccineTypeId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 12, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(4896), 6, 1 },
-                    { 2, new DateTime(2025, 4, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5190), 7, 2 },
-                    { 3, new DateTime(2025, 6, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5193), 8, 3 },
-                    { 4, new DateTime(2025, 9, 6, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(5195), 6, 2 }
+                    { 1, new DateTime(2024, 12, 9, 10, 55, 40, 14, DateTimeKind.Local).AddTicks(6585), 6, 1 },
+                    { 2, new DateTime(2025, 4, 9, 10, 55, 40, 14, DateTimeKind.Local).AddTicks(7857), 7, 2 },
+                    { 3, new DateTime(2025, 6, 9, 10, 55, 40, 14, DateTimeKind.Local).AddTicks(7876), 8, 3 },
+                    { 4, new DateTime(2025, 9, 9, 10, 55, 40, 14, DateTimeKind.Local).AddTicks(7880), 6, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -491,10 +491,10 @@ namespace Hrubos.HospitalSystem.Infrastructure.Migrations
                 columns: new[] { "Id", "DateTime", "DoctorId", "ExaminationTypeId", "PatientId", "ProblemDescription" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 11, 26, 18, 41, 54, 175, DateTimeKind.Local).AddTicks(7712), 2, 1, 6, "Vysoký tlak" },
-                    { 2, new DateTime(2025, 12, 1, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(468), 3, 3, 7, "Krevní test" },
-                    { 3, new DateTime(2025, 12, 4, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(482), 4, 2, 8, "Bolest kloubů" },
-                    { 4, new DateTime(2025, 11, 28, 18, 41, 54, 177, DateTimeKind.Local).AddTicks(485), 4, 2, 7, "Bolest zápěstí" }
+                    { 1, new DateTime(2025, 11, 29, 10, 55, 40, 9, DateTimeKind.Local).AddTicks(8342), 2, 1, 6, "Vysoký tlak" },
+                    { 2, new DateTime(2025, 12, 4, 10, 55, 40, 13, DateTimeKind.Local).AddTicks(2719), 3, 3, 7, "Krevní test" },
+                    { 3, new DateTime(2025, 12, 7, 10, 55, 40, 13, DateTimeKind.Local).AddTicks(2761), 4, 2, 8, "Bolest kloubů" },
+                    { 4, new DateTime(2025, 12, 1, 10, 55, 40, 13, DateTimeKind.Local).AddTicks(2767), 4, 2, 7, "Bolest zápěstí" }
                 });
 
             migrationBuilder.InsertData(
