@@ -108,12 +108,6 @@ namespace Hrubos.HospitalSystem.Web.Areas.Admin.Controllers
             var existingExaminationResults = _examinationResultAppService.SelectAll()
                 .FirstOrDefault(r => r.ExaminationId == examinationResult.ExaminationId);
 
-            // Kontrola, zda již pro dané vyšetření existuje výsledek
-            if (existingExaminationResults != null)
-            {
-                ModelState.AddModelError(nameof(ExaminationResult.ExaminationId), "Pro toto vyšetření již výsledek existuje!");
-            }
-
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Editace výsledku vyšetření s ID {id} selhala kvůli validaci.", id);

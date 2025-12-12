@@ -122,7 +122,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Doctor.Controllers
             var allUsers = await _securityIdentityService.GetAllUsersAsync();
             var currentUser = await _securityIdentityService.GetCurrentUserAsync(User);
 
-            // Získáme seznam IDček pacientů, které už doktor má (volitelné vylepšení)
+            // Moji pacienti
             var myCurrentPatientIds = _doctorPatientAppService.SelectAll()
                                         .Where(dp => dp.DoctorId == currentUser.Id)
                                         .Select(dp => dp.PatientId)
@@ -133,9 +133,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Doctor.Controllers
             {
                 var roles = await _securityIdentityService.GetRolesAsync(user.Id.ToString());
 
-                // Chceme jen uživatele, kteří:
-                // 1. Nejsou Admin ani Doktor (jsou to pacienti)
-                // 2. (Volitelně) Ještě je nemám v péči - abych je nepřidával dvakrát
+                // Pouze pacienti, které ještě nemám v péči
                 bool isPatient = !roles.Contains(nameof(Roles.Admin)) && !roles.Contains(nameof(Roles.Doctor));
                 bool isNotMyPatientYet = !myCurrentPatientIds.Contains(user.Id);
 

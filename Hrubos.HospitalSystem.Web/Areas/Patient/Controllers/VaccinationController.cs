@@ -110,7 +110,7 @@ namespace Hrubos.HospitalSystem.Web.Areas.Patient.Controllers
             // Nelze zrušit již proběhlé očkování
             if (vaccination.DateTime < DateTime.Now)
             {
-                _logger.LogWarning("Pacient s ID {patId} se pokusil zrušit již proběhlé očkování s ID {examId}.", currentUser.Id, id);
+                _logger.LogWarning("Pacient s ID {patId} se pokusil zrušit již proběhlé očkování s ID {vacId}.", currentUser.Id, id);
                 return RedirectToAction(nameof(Select));
             }
 
