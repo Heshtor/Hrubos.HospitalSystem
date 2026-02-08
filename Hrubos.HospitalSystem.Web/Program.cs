@@ -93,6 +93,26 @@ builder.Services.AddScoped<ISecurityIdentityService, SecurityIdentityService>();
 
 var app = builder.Build();
 
+
+// Automatická migrace databáze pøi spuštìní aplikace
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<HospitalSystemDbContext>();
+        // Pokud tabulky neexistují, vytvoøí je. Pokud existují, aplikuje zmìny.
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        // Pokud se to nepovede (napø. špatné heslo k DB), zapíše to do logu
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
